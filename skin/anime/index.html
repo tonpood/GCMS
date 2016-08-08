@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>{TITLE}</title>
+	<meta charset=UTF-8>
+	<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        {META}
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
+	<link rel="shortcut icon" href="{WEBURL}/favicon.ico">
+	<link rel=icon href="{WEBURL}/favicon.gif">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" type="text/css">
+	<link rel=stylesheet href="{WEBURL}/{SKIN}style.css" type="text/css">
+	<link rel=stylesheet href="{WEBURL}/{SKIN}gcss.css" type="text/css">
+	<link rel=stylesheet href="{WEBURL}/{SKIN}css.php" type="text/css">
+	<script src="{WEBURL}/js/js.php" type="text/javascript"></script>
+	<script>
+	{SCRIPT}
+	</script>
+	<!--[if lt IE 9]>
+	<script src={WEBURL}/js/html5.js></script>
+	<![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body class="responsive toTop" data-fontsize="18">
+	<img src="{WEBURL}/{SKIN}img/header.jpg" class="img-responsive" alt="header">
+	<nav class="navbar navbar-custom">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="{WEBURL}">{WEBTITLE}</a>
+	</div>
+	<div class="collapse navbar-collapse">
+		<ul class="nav navbar-nav">
+		{MAINMENU}
+		</ul>
+	</div>
+	</div>
+	</nav>
+	<div class="ro">
+	<p class="ro1"><img src="{WEBURL}/{SKIN}img/ro/ro_01.png" height="750" width="750" alt=""></p>
+	<p class="ro2"><img src="{WEBURL}/{SKIN}img/ro/ro_02.png" height="750" width="750" alt=""></p>
+	<p class="ro1"><img src="{WEBURL}/{SKIN}img/ro/ro_03.png" height="750" width="750" alt=""></p>
+	<p class="ro2"><img src="{WEBURL}/{SKIN}img/ro/ro_04.png" height="750" width="750" alt=""></p>
+	<p class="ro1"><img src="{WEBURL}/{SKIN}img/ro/ro_05.png" height="750" width="750" alt=""></p>
+	</div>
+	<div class="container" id=content style="padding-top: 20px;">
+	{CONTENT}
+	</div>
+	<div class="footer_grid" style="padding-top: 20px;">
+				<div class="gcss-wrapper">
+					<div class="ggrid ggridfooter">
+						<section class="float-left block3">
+							<header><h3>Radio BOX</h3></header>
+							
+						</section>
+						<section class="float-left block3">
+							<header><h3>Member</h3></header>
+							<div id=login-box>{LOGIN}</div>
+	  					</section>
+						<section class="float-left block3">
+							<header><h3>Gallery</h3></header>
+							<div class="widget gallery">{WIDGET_GALLERY}</div>
+						</section>
+						<div class="float-left block3">
+							<section class="search-box rounded">
+								<header><h3>Search</h3></header>
+								{WIDGET_SEARCH}
+							</section>
+							<div class="color center">{WIDGET_SHARE}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer footer_bg_color footer_bg">
+				<div class="ggridfooter">
+				<p>
+					Copyright &copy; 2016 <a href="{WEBURL}">{WEBTITLE}</a>
+					Theme by <a href="http://animecity25.x10host.com">อาณาจักรการ์ตูน</a>
+					GCMS Version {VERSION} by <a href="http://www.goragod.com">Goragod.com</a>
+					{LNG_PAGE_PROCESS} <span id=db_elapsed>{ELAPSED}</span> {LNG_SECOND} (<span id=db_quries>{QURIES}</span> quries.)
+				</p>
+				</div>
+			</footer>	
+</body>
+</html>	

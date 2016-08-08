@@ -1,0 +1,59 @@
+#gchat_div form {
+	padding: 5px;
+}
+#gchat_div #gchat_smile img {
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	padding: 1px;
+}
+#gchat_div #gchat_smile > img:hover {
+	background-color: #C2CCE0;
+	border-color: #2F96B4;
+}
+#gchat_div #gchat_smile {
+	margin: 0;
+	padding: 5px 0 0 0;
+	text-align: center;
+	background-color: #F9F9F9;
+	background-color: rgba(0, 0, 0, 0.02);
+}
+#gchat_div dd.bg2 {
+	background-color: #F9F9F9;
+	background-color: rgba(0, 0, 0, 0.03);
+}
+#gchat_div dd {
+	border-width: 1px;
+	border-bottom-style: dashed;
+	border-color: #EEE;
+	border-color: rgba(0, 0, 0, 0.06);
+	padding: 0 5px;
+	line-height: 2em;
+}
+#gchat_div dd > * {
+	margin-right: 5px;
+}
+#gchat_div dd > .time {
+	font-size: 90%;
+	color: #DDD;
+	color: rgba(0, 0, 0, 0.3);
+}
+#gchat_div dd > .user {
+	font-weight: bold;
+}
+#gchat_body > #gchat_content {
+	display: block;
+	height: 200px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+#gchat_body #gchat_sound {
+	display: block;
+	text-align: center;
+	font-size: 1.6em;
+	color: inherit;
+}
+#gchat_body #gchat_sound.icon-vol-down {
+	color: #EEE;
+	color: rgba(0, 0, 0, 0.2);
+}

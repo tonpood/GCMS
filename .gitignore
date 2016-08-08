@@ -1,0 +1,7 @@
+# Kotchasan
+
+.htaccess
+robots.txt
+/datas/*
+/bin/config.php
+/bin/var.php
