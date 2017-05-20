@@ -9,6 +9,7 @@
 namespace Widgets\Document\Models;
 
 use \Kotchasan\Language;
+use \Kotchasan\Database\Sql;
 
 /**
  * รายการบทความ
@@ -35,7 +36,6 @@ class Index extends \Kotchasan\Model
     // query
     $model = new static;
     // เรียงลำดับ
-    // เรียงลำดับ
     $sorts = array(
       array('I.last_update DESC', 'I.id DESC'),
       array('I.create_date DESC', 'I.id DESC'),
@@ -49,10 +49,10 @@ class Index extends \Kotchasan\Model
       array('I.published_date', '<=', date('Y-m-d'))
     );
     if (!empty($categories)) {
-      $where[] = "I.`category_id` IN ($categories)";
+      $where[] = Sql::create("I.`category_id` IN ($categories)");
     }
     if (!empty($show_news) && preg_match('/^[a-z0-9]+$/', $show_news)) {
-      $where[] = "I.`show_news` LIKE '%$show_news=1%'";
+      $where[] = Sql::create("I.`show_news` LIKE '%$show_news=1%'");
     }
     return $model->db()->createQuery()
         ->select('I.id', 'D.topic', 'I.alias', 'D.description', 'I.picture', 'I.create_date', 'I.last_update', 'I.comment_date', 'C.topic category', 'I.member_id', 'I.sender', 'U.status', 'I.comments', 'I.visited')

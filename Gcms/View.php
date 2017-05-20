@@ -74,7 +74,7 @@ class View extends \Gcms\Baseview
       // กรอบ login
       '/{LOGIN}/' => \Index\Login\Controller::init(Login::isMember()),
       // widgets
-      '/{WIDGET_([A-Z]+)(([_\s]+)([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3",4=>"$4"))',
+      '/{WIDGET_([A-Z]+)([_\s]+([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3"))',
       // breadcrumbs
       '/{BREADCRUMBS}/' => implode('', $this->breadcrumbs),
       // ขนาดตัวอักษร
@@ -112,8 +112,8 @@ class View extends \Gcms\Baseview
     $request = array(
       'owner' => strtolower($matches[1]),
     );
-    if (isset($matches[4])) {
-      $request['module'] = $matches[4];
+    if (isset($matches[3])) {
+      $request['module'] = $matches[3];
     }
     if (!empty($request['module'])) {
       foreach (explode(';', $request['module']) as $item) {

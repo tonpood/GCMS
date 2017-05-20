@@ -33,7 +33,7 @@ class Index extends \Kotchasan\Controller
    */
   public function get($query_string)
   {
-    if ($index = Gcms::$module->findByModule($query_string['module'])) {
+    if (!empty(Gcms::$module) && $index = Gcms::$module->findByModule($query_string['module'])) {
       // ค่าที่ส่งมา
       $cols = isset($query_string['cols']) ? (int)$query_string['cols'] : 1;
       if (isset($query_string['count'])) {
@@ -86,8 +86,9 @@ class Index extends \Kotchasan\Controller
         $valid_date = time() - (int)$index->new_date;
         // query ข้อมูล
         foreach (\Widgets\Document\Models\Index::get($match[2], $match[3], $match[7], $match[6], $rows * $cols) as $item) {
-          $listitem->add(View::renderItem($index, $item, $valid_date, $cols));
+          $listitem->add(\Widgets\Document\Views\Index::renderItem($index, $item, $valid_date, $cols));
         }
+        // คืนค่า
         echo createClass('Gcms\View')->renderHTML($listitem->render());
       }
     }
