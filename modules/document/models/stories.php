@@ -13,7 +13,7 @@ use \Kotchasan\Date;
 use \Kotchasan\Language;
 
 /**
- * ลิสต์รายการบทความ
+ * ลิสต์รายการ บทความ
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,7 +23,7 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * ลิสต์รายการบทความ
+   * ลิสต์รายการ บทความ
    *
    * @param Request $request
    * @param Object $index

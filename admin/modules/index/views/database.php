@@ -13,7 +13,7 @@ use \Kotchasan\Language;
 use \Gcms\Gcms;
 
 /**
- * Database
+ * module=database
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -23,7 +23,6 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=database
    * ฟอร์ม export
    *
    * @return string

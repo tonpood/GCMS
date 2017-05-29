@@ -57,7 +57,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-cc',
       'itemClass' => 'item',
       'label' => '{LNG_Copy to}',
-      'comment' => '{LNG_More email addresses to send a copy of the email. Separate each item with comma (,)}',
+      'comment' => '{LNG_More email addresses to send a copy of the email} ({LNG_Separate them with a comma})',
       'value' => $index->copy_to
     ));
     // subject

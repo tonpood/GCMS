@@ -15,7 +15,6 @@ use \Kotchasan\Login;
 use \Kotchasan\ArrayTool;
 use \Kotchasan\Date;
 use \Kotchasan\File;
-use \Kotchasan\Http\UploadedFile;
 use \Kotchasan\Database\Sql;
 
 /**
@@ -36,8 +35,8 @@ class Model extends \Kotchasan\Model
   public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -50,7 +49,7 @@ class Model extends \Kotchasan\Model
           $topic = $request->post('topic_'.$lng)->topic();
           $alias = Gcms::aliasName($request->post('topic_'.$lng)->toString());
           $relate = $request->post('relate_'.$lng)->quote();
-          $keywords = $request->post('keywords_'.$lng)->keywords();
+          $keywords = implode(',', $request->post('keywords_'.$lng, array())->topic());
           $description = $request->post('description_'.$lng)->description();
           if (!empty($topic)) {
             $save = array();
@@ -156,7 +155,7 @@ class Model extends \Kotchasan\Model
             if (empty($ret)) {
               // อัปโหลดไฟล์
               foreach ($request->getUploadedFiles() as $item => $file) {
-                /* @var $file UploadedFile */
+                /* @var $file \Kotchasan\Http\UploadedFile */
                 if ($file->hasUploadFile()) {
                   if (!File::makeDirectory(ROOT_PATH.DATA_FOLDER.'document/')) {
                     // ไดเรคทอรี่ไม่สามารถสร้างได้
@@ -213,6 +212,8 @@ class Model extends \Kotchasan\Model
               // ส่งค่ากลับ
               $ret['alert'] = Language::get('Saved successfully');
               $ret['location'] = $request->getUri()->postBack('index.php', array('mid' => $index['module_id'], 'module' => 'document-setup'));
+              // clear
+              $request->removeToken();
             } elseif ($tab) {
               $ret['tab'] = $tab;
             }

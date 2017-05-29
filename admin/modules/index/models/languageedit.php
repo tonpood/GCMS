@@ -58,11 +58,11 @@ class Model extends \Kotchasan\Model
   /**
    * form submit
    */
-  public function save(Request $request)
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -146,6 +146,8 @@ class Model extends \Kotchasan\Model
               unset($ret['location']);
               $ret['alert'] = $error;
             }
+            // clear
+            $request->removeToken();
           }
         }
       }

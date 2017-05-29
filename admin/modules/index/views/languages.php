@@ -12,7 +12,7 @@ use \Kotchasan\Html;
 use \Kotchasan\Language;
 
 /**
- * รายการภาษาที่ติดตั้งแล้ว
+ * module=tags
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,15 +22,16 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=languages
+   * รายการภาษาที่ติดตั้งแล้ว
    *
    * @return string
    */
   public function render()
   {
-    $section = Html::create('div', array(
-        'class' => 'subtitle',
-        'innerHTML' => '{LNG_Add, edit, and reorder the language of the site. The first item is the default language of the site.}'
+    $section = Html::create('div');
+    $section->add('div', array(
+      'class' => 'subtitle',
+      'innerHTML' => '{LNG_Add, edit, and reorder the language of the site. The first item is the default language of the site.}'
     ));
     $list = $section->add('ol', array(
       'class' => 'editinplace_list',

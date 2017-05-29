@@ -105,6 +105,10 @@ class Model extends \Kotchasan\Model
               }
             }
             break;
+          case 'keywords':
+          case 'description':
+            $index->$key = $value.', '.$index->$key;
+            break;
           default:
             $index->$key = $value;
             break;

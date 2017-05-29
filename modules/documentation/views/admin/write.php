@@ -10,11 +10,10 @@ namespace Documentation\Admin\Write;
 
 use \Kotchasan\Html;
 use \Kotchasan\Language;
-use \Gcms\Gcms;
 use \Kotchasan\ArrayTool;
 
 /**
- * ฟอร์มสร้าง/แก้ไข เนื้อหา
+ * module=documentation-write
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,7 +23,7 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=documentation-write
+   * ฟอร์มสร้าง/แก้ไข เนื้อหา
    *
    * @param object $index
    * @return string
@@ -36,9 +35,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/documentation/model/admin/write/save',
+        'action' => 'index.php/documentation/model/admin/write/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     foreach ($index->languages as $item) {
       // รายละเอียด
@@ -73,7 +73,7 @@ class View extends \Gcms\Adminview
         'labelClass' => 'g-input icon-edit',
         'itemClass' => 'item',
         'label' => '{LNG_Relate}',
-        'comment' => '{LNG_Title or topic 3 to 255 characters}',
+        'comment' => '{LNG_Used to group similar contents} ({LNG_Separate them with a comma})',
         'value' => $details->relate
       ));
       // description

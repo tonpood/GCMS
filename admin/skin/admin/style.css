@@ -237,7 +237,7 @@ section > header {
 /* edit inplace */
 .editinplace_list {
   display: block;
-  padding: 0 10px;
+  padding: 0;
   white-space: nowrap;
   list-style-type: none;
   border-top: 1px solid #DDD;
@@ -246,7 +246,7 @@ section > header {
   display: block;
   border-top: 1px solid #FFF;
   border-bottom: 1px solid #DDD;
-  padding: 5px 0;
+  padding: 5px 10px;
 }
 .editinplace_list > li > span,
 .editinplace_list > li > a {

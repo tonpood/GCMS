@@ -33,7 +33,7 @@ class View extends \Gcms\Adminview
   private $categories;
 
   /**
-   * แสดงรายการบทความ
+   * ตารางรายการ
    *
    * @param object $index
    * @return string

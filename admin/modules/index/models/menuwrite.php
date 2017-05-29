@@ -180,11 +180,11 @@ class Model extends \Kotchasan\Model
    *
    * @param Request $request
    */
-  public function save(Request $request)
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -197,7 +197,7 @@ class Model extends \Kotchasan\Model
           'alias' => $request->post('alias')->topic(),
           'parent' => strtoupper($request->post('parent')->topic()),
           'published' => $request->post('published')->toInt(),
-          'menu_url' => $request->post('menu_url')->url(),
+          'menu_url' => str_replace(array('&#x007B;', '&#x007D;'), array('{', '}'), $request->post('menu_url')->url()),
           'menu_target' => $request->post('menu_target')->topic()
         );
         $id = $request->post('id')->toInt();
@@ -308,6 +308,8 @@ class Model extends \Kotchasan\Model
           // ส่งค่ากลับ
           $ret['alert'] = Language::get('Saved successfully');
           $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'menus', 'id' => null, 'parent' => $save['parent']));
+          // clear
+          $request->removeToken();
         }
       }
     } else {

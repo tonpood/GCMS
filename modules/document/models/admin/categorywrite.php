@@ -90,8 +90,8 @@ class Model extends \Kotchasan\Model
   public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -171,6 +171,7 @@ class Model extends \Kotchasan\Model
               // อัปโหลดไฟล์
               $icon = ArrayTool::unserialize($index['icon']);
               foreach ($request->getUploadedFiles() as $item => $file) {
+                /* @var $file \Kotchasan\Http\UploadedFile */
                 if ($file->hasUploadFile()) {
                   if (!File::makeDirectory(ROOT_PATH.DATA_FOLDER.'document/')) {
                     // ไดเรคทอรี่ไม่สามารถสร้างได้
@@ -213,6 +214,8 @@ class Model extends \Kotchasan\Model
               // ส่งค่ากลับ
               $ret['alert'] = Language::get('Saved successfully');
               $ret['location'] = $request->getUri()->postBack('index.php', array('id' => $index['module_id'], 'module' => 'document-category'));
+              // clear
+              $request->removeToken();
             }
           } else {
             $ret['alert'] = Language::get('Unable to complete the transaction');

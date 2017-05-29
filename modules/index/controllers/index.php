@@ -111,15 +111,13 @@ class Controller extends \Kotchasan\Controller
         // ไม่พบหน้าที่เรียก (index)
         $page = createClass('Index\PageNotFound\Controller')->init('index');
       }
-      // title ของเว็บไซต์
-      $web_title = strip_tags($page->topic);
       // meta tag
       $meta = array(
         'generator' => '<meta name=generator content="GCMS AJAX CMS design by https://gcms.in.th">',
-        'og:title' => '<meta property="og:title" content="'.$web_title.'">',
+        'og:title' => '<meta property="og:title" content="'.$page->topic.'">',
         'description' => '<meta name=description content="'.$page->description.'">',
         'keywords' => '<meta name=keywords content="'.$page->keywords.'">',
-        'og:site_name' => '<meta property="og:site_name" content="'.$web_title.'">',
+        'og:site_name' => '<meta property="og:site_name" content="'.strip_tags(self::$cfg->web_title).'">',
         'og:type' => '<meta property="og:type" content="article">'
       );
       if (empty($page->image_src) && isset(Gcms::$site['logo'])) {
@@ -136,6 +134,9 @@ class Controller extends \Kotchasan\Controller
         $meta['canonical'] = '<meta name=canonical content="'.$page->canonical.'">';
         $meta['og:url'] = '<meta property="og:url" content="'.$page->canonical.'">';
       }
+      if (!empty(self::$cfg->google_site_verification)) {
+        $meta['google_site_verification'] = '<meta name="google-site-verification" content="'.self::$cfg->google_site_verification.'">';
+      }
       Gcms::$view->setMetas($meta);
       // ภาษาที่ติดตั้ง
       $languages = Template::create('', '', 'language');
@@ -151,7 +152,7 @@ class Controller extends \Kotchasan\Controller
         // content
         '/{CONTENT}/' => $page->detail,
         // title
-        '/{TITLE}/' => $web_title,
+        '/{TITLE}/' => $page->topic,
         // ภาษาที่ติดตั้ง
         '/{LANGUAGES}/' => $languages->render(),
         // โลโก

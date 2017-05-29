@@ -57,7 +57,8 @@ class View extends \Gcms\View
           'autocomplete' => 'off',
           'action' => 'index.php/document/model/write/submit',
           'onsubmit' => 'doFormSubmit',
-          'ajax' => true
+          'ajax' => true,
+          'token' => true
       ));
       $form->add('header', array(
         'innerHTML' => '<h2 class=icon-write>'.$index->topic.'</h2>'
@@ -81,13 +82,14 @@ class View extends \Gcms\View
           'value' => $details->topic
         ));
         // keywords
-        $fieldset->add('textarea', array(
+        $fieldset->add('checkboxgroups', array(
           'id' => 'keywords_'.$item,
           'labelClass' => 'g-input icon-tags',
           'itemClass' => 'item',
           'label' => '{LNG_Keywords}',
           'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
-          'value' => $details->keywords
+          'options' => \Index\Tag\Model::toSelect(),
+          'value' => explode(',', $details->keywords)
         ));
         // relate
         $fieldset->add('text', array(
@@ -95,7 +97,7 @@ class View extends \Gcms\View
           'labelClass' => 'g-input icon-edit',
           'itemClass' => 'item',
           'label' => '{LNG_Relate}',
-          'comment' => '{LNG_Title or topic 3 to 255 characters}',
+          'comment' => '{LNG_Used to group similar contents} ({LNG_Separate them with a comma})',
           'value' => $details->relate
         ));
         // description

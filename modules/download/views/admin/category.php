@@ -42,9 +42,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/download/model/admin/category/save',
+        'action' => 'index.php/download/model/admin/category/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Details of} {LNG_Category}'

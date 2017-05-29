@@ -25,7 +25,7 @@ class Model extends \Kotchasan\KBase
    */
   public function action()
   {
-    // referer, session, admin
+    // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
       if ($login['email'] != 'demo' && empty($login['fb'])) {
         // action

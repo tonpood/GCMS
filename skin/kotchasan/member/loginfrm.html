@@ -1,0 +1,21 @@
+<div class="gcss-wrapper">
+  <div class=bdr_content>
+    <header>
+      <h2 class=icon-user>{TOPIC}</h2>
+      <nav class="breadcrumbs cuttext">
+        <ul>{BREADCRUMBS}</ul>
+      </nav>
+    </header>
+    <div class="{FACEBOOK} center facebook">
+      <a id=login_fb class="button blue icon-facebook">{LNG_Login With Facebook}</a>
+      <div class="comment margin-top">{LNG_Sign in with your Facebook account}</div>
+      <input type=hidden id=login_action name=login_action value="{WEBURL}index.php">
+      <input type=hidden name=token id=token value="{TOKEN}">
+    </div>
+  </div>
+</div>
+<script>
+  $G(window).Ready(function () {
+    callClick('login_fb', fbLogin);
+  });
+</script>

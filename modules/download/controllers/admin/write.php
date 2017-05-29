@@ -31,6 +31,10 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Download file}';
+    // เลือกเมนู
+    $this->menu = 'modules';
     // ตรวจสอบรายการที่เลือก
     $index = \Download\Admin\Write\Model::get($request->get('mid')->toInt(), $request->get('id')->toInt());
     // login
@@ -39,9 +43,7 @@ class Controller extends \Gcms\Controller
     if ($index && Gcms::canConfig($login, $index, 'can_upload')) {
       $title = '{LNG_'.(empty($index->id) ? 'Create' : 'Edit').'}';
       // ข้อความ title bar
-      $this->title = $title.' {LNG_Download file}';
-      // เลือกเมนู
-      $this->menu = 'modules';
+      $this->title = $title.' '.$this->title;
       // แสดงผล
       $section = Html::create('section');
       // breadcrumbs

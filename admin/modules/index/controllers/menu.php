@@ -108,9 +108,7 @@ class Controller
       unset($menus['sections']['users']);
       unset($menus['sections']['tools']);
     }
-    if (empty($menus['modules'])) {
-      unset($menus['sections']['modules']);
-    }
+    $menus['modules']['tags'] = '<a href="index.php?module=tags"><span>{LNG_List of} {LNG_Tags}</span></a>';
     if (isset($menus['widgets']) && sizeof($menus['widgets']) == 0) {
       unset($menus['sections']['widgets']);
     }

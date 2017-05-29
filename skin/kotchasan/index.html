@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang={LANGUAGE} dir=ltr>
+  <head>
+    <title>{TITLE}</title>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{WEBURL}favicon.ico">
+    <link rel=stylesheet href="{WEBURL}index.php/css/view/index">
+    <script src="{WEBURL}index.php/js/view/index"></script>
+    <!--[if lt IE 9]>
+    <script src={WEBURL}js/html5.js></script>
+    <![endif]-->
+  </head>
+  <body class="responsive wide">
+    <a class=skip_content accesskey=s href=#content title="{LNG_skip to content}"></a>
+    <div id=slidemenu_content>
+      <div class="wrapper">
+        <header class="header header_bg header_bg_color">
+          <div class="gcss-wrapper">
+            <div class="table fullwidth" id=scroll-to>
+              <div class="td">
+                <h1 id="logo">
+                  <a href="{WEBURL}" title="{WEBTITLE}">คชสาร</a>
+                </h1>
+              </div>
+              <div class="td">
+                <div class="menu_wrapper">
+                  <nav id=topmenu class="topmenu slidemenu right">
+                    <ul>{MAINMENU}{LOGIN}</ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="wrapper_top_bg wrapper_bg_color clear">
+          <main class="wrapper_bg" id="toTop">
+            <div class=content>
+              <div id=content class="article clear content_bg content_bg_color">
+                {CONTENT}
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+      <div id=text-links class=center>
+        <a href="https://www.goragod.com" title="Goragod.com"><img src="https://www.goragod.com/smalllogo.gif" alt="Goragod.com"></a>
+        <iframe src="https://www.webshopready.com/ad_small.html" style="width:88px;height:31px;"></iframe>
+      </div>
+      <footer class="footer footer_bg_color footer_bg center">
+        <div class=gcss-wrapper>
+          <p>
+            Copyright &copy; 2016 <a href="{WEBURL}">{WEBTITLE}</a>
+            designed by <a href="https://www.goragod.com">Goragod.com</a> GCMS Version {VERSION}
+            {LNG_page process} <span id=db_elapsed>{ELAPSED}</span> {LNG_second} (<span id=db_quries>{QURIES}</span> quries.)
+          </p>
+        </div>
+      </footer>
+    </div>
+    <a href=#scroll-to class=scroller>^</a>
+    <link href='https://fonts.googleapis.com/css?family=Itim&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-97444123-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  </body>
+</html>

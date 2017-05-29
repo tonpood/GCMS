@@ -29,7 +29,7 @@ class View extends \Gcms\Adminview
   private $categories;
 
   /**
-   * แสดงรายการดาวน์โหลด
+   * ตารางรายการ
    *
    * @param object $index
    * @param array $login

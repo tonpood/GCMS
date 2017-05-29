@@ -118,7 +118,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-user',
       'itemClass' => 'item',
       'label' => '{LNG_Username}',
-      'comment' => '{LNG_Username for the mail server. (To change, enter a new value.)}',
+      'comment' => '{LNG_Username of the mail server} ({LNG_To change it, enter a new value})',
       'value' => isset($config->email_Username) ? $config->email_Username : self::$cfg->email_Username
     ));
     // email_Password
@@ -127,7 +127,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-password',
       'itemClass' => 'item',
       'label' => '{LNG_Password}',
-      'comment' => '{LNG_Password of the mail server. (To change the fill.)}'
+      'comment' => '{LNG_Password of the mail server} ({LNG_To change it, enter a new value})',
     ));
     $fieldset = $form->add('fieldset', array(
       'class' => 'submit'

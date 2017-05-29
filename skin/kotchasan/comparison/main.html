@@ -1,0 +1,65 @@
+<div class="gcss-wrapper">
+  <div class="bdr_content">
+    <header>
+      <h2>{TOPIC}</h2>
+      <nav class="breadcrumbs cuttext">
+        <ul>{BREADCRUMBS}</ul>
+      </nav>
+    </header>
+    <p class="home__section">จุดประสงค์ของการเปรียบเทียบ เพื่อให้เห็นว่า เราสามารถพัฒนาเฟรมเวิร์ค ที่มีคุณสมบัติไม่ด้อยไปกว่าเฟรมเวิร์คชื่อดังในท้องตลาดได้ การเลือกเฟรมเวิร์คที่นำมาใช้เปรียบเทียบผมเลือกเอาเฉพาะที่เป็นที่นิยม และมีคุณสมบัติเด่นๆเท่านั้น หากมีข้อสงสัยใดๆในการทดสอบ
+      ผมแนะนำให้ดำเนินการทดสอบซ้ำด้วยตัวเอง เนื่องจากโค้ดที่ใช้ในการทดสอบทั้งหมด ผมได้อัปโหลดไว้บน Github อยู่แล้ว</p>
+    <div class="home__section">{WIDGET_VIDEO_gjQ1YFFuexI}</div>
+    <section class="home__section">
+      <h3>Loading Performance</h3> เป็นผลการทดสอบการโหลดของ Framework โดยในการทดสอบนี้เป็นการทดสอบการเริ่มต้นของ PHP Framework ต่างๆ แบบ &quot;น้อยที่สุด&quot; โดยให้ผลลัพท์เป็น &quot;Hello World!&quot; เท่านั้น ไม่มีการโหลด HTML CSS และ Javascript แต่อย่างใด
+      <figure class="center"><img alt="" src="{WEBURL}{SKIN}img/loading_performance.png"></figure>
+    </section>
+    <section class="home__section">
+      <h3>Database Performance</h3> ผลการทดสอบการใช้งานฐานข้อมูลด้วย ORM โดยการทดสอบนี้มีการทดสอบเฉพาะเฟรมเวิร์คที่มี ORM เท่านั้น
+      <ul>
+        <li><strong>Cake PHP</strong> 3.0 ใช้ Entity</li>
+        <li><strong>Yii</strong> 2.0 ใช้ ActiveRecord</li>
+        <li><strong>Laravel</strong> 4.2 และ 5.1 ใช้ Eloquent</li>
+        <li><b>คชสาร</b> ใช้ Recordset</li>
+      </ul>
+      ผลการทดสอบแรก เป็นการเรียกดูข้อมูล (SELECT) และมีการบันทึกข้อมูล (UPDATE) ร่วมด้วย
+      <figure class="center"><img alt="" src="{WEBURL}{SKIN}img/orm.png"></figure>
+      ผลการทดสอบที่สอง เป็นการทดสอบการเรียกดูข้อมูล (SELECT) เพียงอย่างเดียว
+
+      <figure class="center"><img alt="" src="{WEBURL}{SKIN}img/select.png"></figure>
+      สุดท้าย เป็นการทดสอบเปรียบเทียบการใช้งานระหว่าง Recordset, Query Builder และ CRUD ของคชสาร
+
+      <figure class="center"><img alt="" src="{WEBURL}{SKIN}img/db.png"></figure>
+    </section>
+    <p class="home__section">ผลการทดสอบรูปแบบกราฟ <a class="term2" href="http://benchmark.kotchasan.com" rel="nofollow" target="_blank">http://benchmark.kotchasan.com</a></p>
+    <div class="home__section float-center">{WIDGET_SHARE_count}</div>
+    <footer>
+      หมายเหตุ
+      <ul>
+        <li><strong>request per second</strong> หมายถึง จำนวนการโหลดหน้าเว็บใน 1 วินาที ค่านี้ยิ่งสูงยิ่งดี (สามารถรองรับจำนวนผู้เยี่ยมชมพร้อมๆกันได้มากขึ้น)</li>
+        <li><strong>peak memory</strong> หมายถึงอัตราการใช้งานหน่วยความจำ ยิ่งมีการใช้หน่วยความจำน้อยเท่าไรยิ่งดี</li>
+        <li><strong>exec time</strong> หมายถึง เวลาในการประมวลผลหน้าเพจ ยิ่งใช้เวลาน้อย ยิ่งดี</li>
+        <li><strong>Included Files</strong> หมายถึงจำนวนไฟล์ที่มีการรวมเข้ามาในระบบขณะทำงาน ยิ่งน้อยก็ยิ่งมีแนวโน้มจะมีประสิทธิภาพสูงขึ้น</li>
+      </ul>
+      โค้ดที่ใช้ในการทดสอบ
+      <ul>
+        <li>โปรเจ็ค <a href="https://github.com/goragod/kotchasan/blob/1.0.0/projects/benchmark/modules/index/controllers/index.php" rel="nofollow" target="_blank">projects/benchmark/</a> โค้ดของคชสารที่ใช้ในการทดสอบ</li>
+        <li>โปรเจ็ค <a href="https://github.com/goragod/php-framework-benchmark" rel="nofollow" target="_blank">php-framework-benchmark</a> สำหรับโปรแกรมทดสอบ (มีการดัดแปลงจากต้นฉบับเล็กน้อย และโค้ดของเฟรมเวิร์คอื่นๆอยู่ในโปรเจ็คนี้)</li>
+      </ul>
+      ข้อมูลผลการทดสอบที่ได้จาก apache bench
+      <ul>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/cake-3.1.ab.log" target="log">cake-3.1.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/laravel-5.1.ab.log" target="log">laravel-5.1.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/symfony-2.7.ab.log" target="log">symfony-2.7.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/fuel-1.8.ab.log" target="log">fuel-1.8.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/yii-2.0.ab.log" target="log">yii-2.0.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/codeigniter-3.0.ab.log" target="log">codeigniter-3.0.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/slim-3.0.ab.log" target="log">slim-3.0.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/ice-1.1.3.ab.log" target="log">ice-1.1.3.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/kotchasan.ab.log" target="log">kotchasan.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/phalcon-2.0.ab.log" target="log">phalcon-2.0.ab.log</a></li>
+        <li><a href="http://benchmark.kotchasan.com/output/hello/noframework.ab.log">noframework.ab.log</a></li>
+      </ul>
+      <div class="message">การทดสอบนี้ ทดสอบบน <strong>PHP Version 5.6.24-1+deb.sury.org~xenial+1 และไม่มีการใช้งาน Cache ใดๆทั้งสิ้น</strong></div>
+    </footer>
+  </div>
+</div>

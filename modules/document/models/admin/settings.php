@@ -62,11 +62,11 @@ class Model extends \Kotchasan\Model
    *
    * @param Request $request
    */
-  public function save(Request $request)
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -143,6 +143,8 @@ class Model extends \Kotchasan\Model
                 // คืนค่า
                 $ret['alert'] = Language::get('Saved successfully');
                 $ret['location'] = $request->getUri()->postBack('index.php', array('module' => 'document-settings', 'mid' => $index->module_id));
+                // clear
+                $request->removeToken();
               } else {
                 // ไม่สามารถบันทึก config ได้
                 $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');

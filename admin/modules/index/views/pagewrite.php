@@ -34,10 +34,11 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/index/model/pagewrite/save',
+        'action' => 'index.php/index/model/pagewrite/submit',
         'onsubmit' => 'doFormSubmit',
         'ajax' => true,
-        'upload' => true
+        'upload' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Details of} '.Language::get($index->owner === 'index' ? 'Page' : 'Module')
