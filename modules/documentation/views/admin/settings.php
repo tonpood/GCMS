@@ -12,7 +12,7 @@ use \Kotchasan\Html;
 use \Kotchasan\HtmlTable;
 
 /**
- * โมดูลสำหรับจัดการการตั้งค่า
+ * module=documentation-settings
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -22,7 +22,7 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=documentation-settings
+   * จัดการการตั้งค่า
    *
    * @param object $index
    * @return string
@@ -34,9 +34,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/documentation/model/admin/settings/save',
+        'action' => 'index.php/documentation/model/admin/settings/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Role of Members}'

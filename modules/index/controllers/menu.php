@@ -85,7 +85,7 @@ class Controller extends \Kotchasan\Controller
   public function isHome($index_id)
   {
     $home = $this->homeMenu();
-    return $home && $home->module->index_id == $index_id;
+    return $home && isset($home->module) && $home->module->index_id == $index_id;
   }
 
   /**

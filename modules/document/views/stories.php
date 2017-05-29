@@ -85,7 +85,7 @@ class View extends \Gcms\View
       Gcms::$view->addBreadcrumb($index->canonical, $index->topic);
     } else {
       // breadcrumb ของโมดูล
-      if (Gcms::$menu->isHome($index->index_id) && empty($index->category_id)) {
+      if (Gcms::$menu->isHome($index->index_id)) {
         $index->canonical = WEB_URL.'index.php';
       } else {
         if (empty($index->category_id)) {

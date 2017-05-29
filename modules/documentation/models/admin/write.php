@@ -137,11 +137,11 @@ class Model extends \Kotchasan\Model
    *
    * @param Request $request
    */
-  public function save(Request $request)
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isMember()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -288,6 +288,8 @@ class Model extends \Kotchasan\Model
               // ส่งค่ากลับ
               $ret['alert'] = Language::get('Saved successfully');
               $ret['location'] = $request->getUri()->postBack('index.php', array('mid' => $index['module_id'], 'module' => 'documentation-setup'));
+              // clear
+              $request->removeToken();
             } else {
               $ret['input'] = $input;
               if ($tab) {

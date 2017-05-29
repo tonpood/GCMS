@@ -54,7 +54,7 @@ class Model extends Field
   public static function action()
   {
     $ret = array();
-    // referer, session, admin
+    // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');

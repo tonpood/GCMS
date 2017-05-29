@@ -5,6 +5,7 @@
 .widget-tags > a {
   margin: 2px;
   display: inline-block;
+  cursor: pointer;
 }
 .widget-tags > a:hover {
   background: #FEE8FF;

@@ -33,7 +33,7 @@ class Model extends \Kotchasan\Orm\Field
   public function action()
   {
     $ret = array();
-    // referer, session, admin
+    // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
       if (empty($login['fb'])) {
         // ค่าที่ส่งมา

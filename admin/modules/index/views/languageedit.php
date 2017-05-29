@@ -36,8 +36,9 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'onsubmit' => 'doFormSubmit',
-        'action' => 'index.php/index/model/languageedit/save',
-        'ajax' => true
+        'action' => 'index.php/index/model/languageedit/submit',
+        'ajax' => true,
+        'token' => true
     ));
     // fieldset
     $fieldset = $form->add('fieldset', array(

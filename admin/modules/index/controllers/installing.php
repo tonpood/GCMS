@@ -51,7 +51,7 @@ class Controller extends \Kotchasan\Controller
         if (!empty($result['content'])) {
           $fieldset->add('ol', array(
             'class' => 'install',
-            'innerHTML' => implode('', $result['content'])
+            'innerHTML' => $result['content']
           ));
         }
         if (empty($result['error'])) {

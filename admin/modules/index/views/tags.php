@@ -1,43 +1,44 @@
 <?php
 /**
- * @filesource Widgets/Tags/Views/Settings.php
+ * @filesource index/views/tags.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
-namespace Widgets\Tags\Views;
+namespace Index\Tags;
 
+use \Kotchasan\Http\Request;
 use \Kotchasan\Html;
 
 /**
- * โมดูลสำหรับจัดการการตั้งค่าเริ่มต้น
+ * module=tags
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
-class Settings extends \Gcms\Adminview
+class View extends \Gcms\Adminview
 {
 
   /**
-   * module=Tags-settings
+   * ตารางรายการ Tags
    *
+   * @param Request $request
    * @return string
    */
-  public function render()
+  public function render(Request $request)
   {
-    $section = Html::create('div', array(
-        'class' => ''
+    $section = Html::create('div');
+    $section->add('div', array(
+      'class' => 'subtitle',
+      'innerHTML' => '{LNG_Tag listings can be listed in the Widgets}'
     ));
-    $div = $section->add('div', array(
-      'class' => 'item'
-    ));
-    $list = $div->add('ol', array(
+    $list = $section->add('ol', array(
       'class' => 'editinplace_list',
       'id' => 'config_status'
     ));
-    foreach (\Widgets\Tags\Models\Settings::all() as $item) {
+    foreach (\Index\Tags\Model::all() as $item) {
       $row = $list->add('li', array(
         'id' => 'config_status_'.$item['id']
       ));
@@ -67,7 +68,7 @@ class Settings extends \Gcms\Adminview
       'class' => 'icon-plus',
       'innerHTML' => '{LNG_Add New} {LNG_Tags}'
     ));
-    $section->script('initEditInplace("config_status", "Widgets/Tags/Models/Settings/save");');
+    $section->script('initEditInplace("config_status", "index/model/tags/action");');
     return $section->render();
   }
 }

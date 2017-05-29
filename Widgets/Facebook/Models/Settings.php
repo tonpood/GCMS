@@ -40,7 +40,7 @@ class Settings extends \Kotchasan\KBase
   public function save(Request $request)
   {
     $ret = array();
-    // referer, session, admin
+    // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');

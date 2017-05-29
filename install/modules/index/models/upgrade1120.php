@@ -8,8 +8,6 @@
 
 namespace Index\Upgrade1120;
 
-use \Kotchasan\Language;
-
 /**
  * อัปเกรด
  *
@@ -90,7 +88,7 @@ class Model extends \Index\Upgrade\Model
     // update database.php
     $f = \Index\Upgrade\Model::updateTables(array('language' => 'language'));
     $content[] = '<li class="'.($f ? 'correct' : 'incorrect').'">Update file <b>database.php</b> ...</li>';
-    $content[] = '<li class="correct">Upgrade to Version <b>11.1.0</b> complete.</li>';
+    $content[] = '<li class="correct">Upgrade to Version <b>11.2.0</b> complete.</li>';
     return (object)array(
         'content' => implode('', $content),
         'version' => '11.2.0'

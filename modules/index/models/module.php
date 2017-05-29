@@ -78,7 +78,7 @@ class Model
   {
     $model = new \Kotchasan\Model;
     $query = $model->db()->createQuery()
-      ->select('I.id index_id', 'I.module_id', 'M.module', 'M.owner', 'M.config', 'D.topic')
+      ->select('I.id index_id', 'I.module_id', 'M.module', 'M.owner', 'M.config', 'D.topic', 'D.keywords', 'D.description')
       ->from('modules M')
       ->join('index I', 'INNER', array(
         array('I.index', 1),
@@ -93,16 +93,12 @@ class Model
     foreach ($query->execute() as $item) {
       $config = @unserialize($item['config']);
       if (is_array($config)) {
-        $config['index_id'] = $item['index_id'];
-        $config['module_id'] = $item['module_id'];
-        $config['module'] = $item['module'];
-        $config['owner'] = $item['owner'];
-        $config['topic'] = $item['topic'];
-        $result[$item['index_id']] = (object)$config;
-      } else {
-        unset($item['config']);
-        $result[$item['index_id']] = (object)$item;
+        foreach ($config as $key => $value) {
+          $item[$key] = $value;
+        }
       }
+      unset($item['config']);
+      $result[$item['index_id']] = (object)$item;
     }
     return $result;
   }

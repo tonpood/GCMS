@@ -1,28 +1,30 @@
 <?php
 /**
- * @filesource Widgets/Tags/Controllers/Settings.php
+ * @filesource index/models/memberstatus.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
  */
 
-namespace Widgets\Tags\Models;
+namespace Index\Tags;
 
+use \Kotchasan\Http\Request;
 use \Kotchasan\Login;
 use \Kotchasan\Language;
 
 /**
- * Controller สำหรับจัดการการตั้งค่าเริ่มต้น
+ * Model สำหรับจัดการ Tags
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
-class Settings extends \Kotchasan\Model
+class Model extends \Kotchasan\Model
 {
 
   /**
    * query รายการ tag ทั้งหมด
+   * เรียงลำดับตาม ID
    *
    * @return array
    */
@@ -32,25 +34,26 @@ class Settings extends \Kotchasan\Model
     return $model->db()->createQuery()
         ->select()
         ->from('tags')
-        ->order('count')
-        ->toArray()
         ->order('id')
+        ->toArray()
         ->execute();
   }
 
   /**
-   * save
+   * รับค่าจาก action
+   *
+   * @param Request $request
    */
-  public function save()
+  public function action(Request $request)
   {
     $ret = array();
-    // referer, session, admin
-    if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
+    // session, referer, admin
+    if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
         // ค่าที่ส่งมา
-        $action = self::$request->post('action')->toString();
+        $action = $request->post('action')->toString();
         if (preg_match('/^config_status_(add|name|delete)(_([0-9]+))?$/', $action, $match)) {
           if ($match[1] == 'add') {
             // เพิ่ม
@@ -72,7 +75,7 @@ class Settings extends \Kotchasan\Model
             $ret['del'] = str_replace('delete_', '', $action);
           } elseif ($match[1] == 'name') {
             // แก้ไข Tag
-            $value = self::$request->post('value')->topic();
+            $value = $request->post('value')->topic();
             $this->db()->update($this->getTableName('tags'), (int)$match[3], array('tag' => $value));
             // ส่งข้อมูลใหม่ไปแสดงผล
             $ret['edit'] = $value;

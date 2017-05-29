@@ -69,7 +69,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-tags',
       'itemClass' => 'item',
       'label' => '{LNG_Tags}',
-      'comment' => '{LNG_Separate them with a comma (,) is used to categorize similar items}',
+      'comment' => '{LNG_Used to group similar contents} ({LNG_Separate them with a comma})',
       'value' => isset($index->keywords) ? $index->keywords : ''
     ));
     // create_date

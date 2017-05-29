@@ -84,11 +84,11 @@ class Model extends \Kotchasan\Model
    *
    * @param Request $request
    */
-  public function save(Request $request)
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
+    // session, token, member
+    if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
@@ -216,6 +216,8 @@ class Model extends \Kotchasan\Model
             $ret['alert'] = Language::get('Saved successfully');
             // กลับไปหน้าก่อนหน้า
             $ret['location'] = $request->getUri()->postBack('index.php');
+            // clear
+            $request->removeToken();
           }
         }
       }
@@ -232,7 +234,7 @@ class Model extends \Kotchasan\Model
   public static function copy()
   {
     $ret = array();
-    // referer, session, admin
+    // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
       if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');

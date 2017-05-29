@@ -47,7 +47,7 @@ class View extends \Gcms\Adminview
       'itemClass' => 'item',
       'labelClass' => 'g-input icon-email-sent',
       'label' => '{LNG_Reciever}',
-      'comment' => '{LNG_Recipient&#39;s Email Address Many can be found Each separated by, (comma).}',
+      'comment' => '{LNG_Email addresses can be sent to multiple recipients} ({LNG_Separate them with a comma})',
       'autofocus',
       'value' => $reciever
     ));

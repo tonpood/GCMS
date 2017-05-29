@@ -19,6 +19,7 @@ use \Gcms\Gcms;
  */
 class Index extends \Kotchasan\Controller
 {
+  private $module;
 
   /**
    * แสดงผล Widget
@@ -29,7 +30,8 @@ class Index extends \Kotchasan\Controller
   public function get($query_string)
   {
     if (defined('MAIN_INIT')) {
-      $tag_result = \Widgets\Tags\Models\Index::get();
+      $this->module = empty($query_string['module']) ? 'tag' : $query_string['module'];
+      $tag_result = \Index\Tag\Model::all();
       $min = 1000000;
       $max = 0;
       $nmax = sizeof($tag_result) - 1;
@@ -48,7 +50,7 @@ class Index extends \Kotchasan\Controller
         } else {
           $classname = 'class'.(floor(($value - $min) / $step) + 1);
         }
-        $url = self::url($key);
+        $url = $this->url($key);
         $items[] = '<a href="'.$url.'" class='.$classname.' id=tags-'.$id.'>'.str_replace(' ', '&nbsp;', $key).'</a>';
       }
       return \Widgets\Tags\Views\Index::render($items);
@@ -61,12 +63,12 @@ class Index extends \Kotchasan\Controller
    * @param string $tag ชื่อ Tag
    * @return string
    */
-  public static function url($tag)
+  private function url($tag)
   {
-    if (self::$cfg->module_url == 1) {
+    if ($this->module == 'tag' && self::$cfg->module_url == 1) {
       return Gcms::createUrl('tag', $tag);
     } else {
-      return Gcms::createUrl('tag', '', 0, 0, 'tag='.$tag);
+      return Gcms::createUrl($this->module, '', 0, 0, 'tag='.rawurlencode($tag));
     }
   }
 }

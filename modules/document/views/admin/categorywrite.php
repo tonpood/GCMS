@@ -38,7 +38,8 @@ class View extends \Gcms\Adminview
         'autocomplete' => 'off',
         'action' => 'index.php/document/model/admin/categorywrite/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Category}'

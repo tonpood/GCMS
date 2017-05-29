@@ -132,9 +132,10 @@ class Model extends \Kotchasan\Model
       $id = self::$request->post('id')->toInt();
       $value = self::$request->post('value')->toString();
       $lng = self::$request->post('lng')->filter('a-z');
+      $owner = self::$request->post('owner')->toString();
       if (!preg_match('/^[a-z0-9]{1,}$/', $value)) {
         echo Language::get('English lowercase and number only');
-      } elseif (in_array($value, Gcms::$MODULE_RESERVE) || (is_dir(ROOT_PATH.'modules/'.$value) || is_dir(ROOT_PATH.'widgets/'.$value) || is_dir(ROOT_PATH.$value) || is_file(ROOT_PATH.$value.'.php'))) {
+      } elseif (in_array($value, Gcms::$MODULE_RESERVE) || (($value != $owner && is_dir(ROOT_PATH.'modules/'.$value)) || is_dir(ROOT_PATH.'Widgets/'.$value) || is_dir(ROOT_PATH.$value) || is_file(ROOT_PATH.$value.'.php'))) {
         // เป็นชื่อโฟลเดอร์หรือชื่อไฟล์
         echo Language::get('Invalid name');
       } else {

@@ -292,7 +292,7 @@ function checkIndexModule() {
   if (!patt.test(value)) {
     this.invalid(this.title);
   } else {
-    return 'action=module&value=' + encodeURIComponent(value) + '&id=' + $E('id').value + '&lng=' + $E('language').value;
+    return 'action=module&value=' + encodeURIComponent(value) + '&id=' + $E('id').value + '&lng=' + $E('language').value + '&owner=' + $E('owner').value;
   }
 }
 function checkIndexTopic() {

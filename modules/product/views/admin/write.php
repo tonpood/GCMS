@@ -38,9 +38,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/product/model/admin/write/save',
+        'action' => 'index.php/product/model/admin/write/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     foreach ($index->languages as $item) {
       // รายละเอียด
@@ -61,13 +62,14 @@ class View extends \Gcms\Adminview
         'value' => $details->topic
       ));
       // keywords
-      $fieldset->add('textarea', array(
+      $fieldset->add('checkboxgroups', array(
         'id' => 'keywords_'.$item,
         'labelClass' => 'g-input icon-tags',
         'itemClass' => 'item',
         'label' => '{LNG_Keywords}',
         'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
-        'value' => $details->keywords
+        'options' => \Index\Tag\Model::toSelect(),
+        'value' => explode(',', $details->keywords)
       ));
       // description
       $fieldset->add('textarea', array(

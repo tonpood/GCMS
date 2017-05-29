@@ -82,20 +82,52 @@ class Model extends \Kotchasan\Orm\Field
    * สำหรับใส่ select หรือ menu
    *
    * @param int $module_id
+   * @param int $group_id 0 (default) หมวดหมู่ทั่วไป, > 0 หมวดหมู่อื่นๆ
    * @return array
    */
-  public static function categories($module_id)
+  public static function categories($module_id, $group_id = 0)
   {
-    $result = array();
     $model = new \Kotchasan\Model;
     $query = $model->db()->createQuery()
       ->select('category_id', 'topic')
       ->from('category')
-      ->where(array(array('module_id', (int)$module_id), array('published', '1')))
+      ->where(array(
+        array('module_id', (int)$module_id),
+        array('group_id', $group_id),
+        array('published', '1')
+      ))
       ->cacheOn()
       ->order('category_id');
+    $result = array();
     foreach ($query->toArray()->execute() as $item) {
       $result[$item['category_id']] = Gcms::ser2Str($item, 'topic');
+    }
+    return $result;
+  }
+
+  /**
+   * อ่านข้อมูลหมวดหมู่ที่สามารถเผยแพร่ได้
+   * สำหรับใส่ select หรือ menu
+   * แยกตาม group_id
+   *
+   * @param int $module_id
+   * @return array
+   */
+  public static function getCategoriesWithGroups($module_id)
+  {
+    $model = new \Kotchasan\Model;
+    $query = $model->db()->createQuery()
+      ->select('group_id', 'category_id', 'topic')
+      ->from('category')
+      ->where(array(
+        array('module_id', (int)$module_id),
+        array('published', '1')
+      ))
+      ->cacheOn()
+      ->order('category_id');
+    $result = array();
+    foreach ($query->toArray()->execute() as $item) {
+      $result[$item['group_id']][$item['category_id']] = Gcms::ser2Str($item, 'topic');
     }
     return $result;
   }

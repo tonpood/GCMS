@@ -8,8 +8,6 @@
 
 namespace Index\Upgrade1200;
 
-use \Kotchasan\Language;
-
 /**
  * อัปเกรด
  *

@@ -14,7 +14,7 @@ use \Kotchasan\Form;
 use \Gcms\Gcms;
 
 /**
- * แสดงรายการหมวดหมู่
+ * module=documentation-category
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -24,13 +24,11 @@ class View extends \Gcms\Adminview
 {
   /**
    * ข้อมูลโมดูล
-   *
-   * @var object
    */
   private $languages;
 
   /**
-   * module=documentation-category
+   * แสดงรายการหมวดหมู่
    *
    * @param object $index
    * @return string
@@ -44,9 +42,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/documentation/model/admin/category/save',
+        'action' => 'index.php/documentation/model/admin/category/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Details of} {LNG_Category}'

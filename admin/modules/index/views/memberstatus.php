@@ -11,7 +11,7 @@ namespace Index\Memberstatus;
 use \Kotchasan\Html;
 
 /**
- * ฟอร์ม Memberstatus
+ * module=memberstatus
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -21,7 +21,7 @@ class View extends \Gcms\Adminview
 {
 
   /**
-   * module=memberstatus
+   * รายการสถานะสมาชิก
    *
    * @return string
    */
