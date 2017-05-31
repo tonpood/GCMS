@@ -38,7 +38,7 @@ class View extends \Gcms\View
     $user = $rs->where((int)$_SESSION['login']['id'])->first('id');
     $template = Template::create('member', 'member', 'password');
     $contents = array(
-      '/{ACCEPT}/' => Mime::getEccept(self::$cfg->user_icon_typies),
+      '/{ACCEPT}/' => Mime::getAccept(self::$cfg->user_icon_typies),
       '/{USER_ICON_TYPIES}/' => sprintf(Language::get('Upload a picture of %s resize automatically'), empty(self::$cfg->user_icon_typies) ? 'jpg' : implode(', ', (self::$cfg->user_icon_typies)))
     );
     // ข้อมูลฟอร์ม

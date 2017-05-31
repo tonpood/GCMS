@@ -61,7 +61,7 @@ class View extends \Gcms\View
           '/{TOPIC}/' => isset($index->topic) ? $index->topic : '',
           '/{DETAIL}/' => isset($index->detail) ? $index->detail : '',
           '/{TOKEN}/' => $request->createToken(),
-          '/{ACCEPT}/' => Mime::getEccept($index->module->file_typies),
+          '/{ACCEPT}/' => Mime::getAccept($index->module->file_typies),
           '/{GROUPS}/' => implode('', $reciever),
           '/{ID}/' => $index->id,
           '/{MODULES}/' => implode('', $modules),
