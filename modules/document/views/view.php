@@ -164,7 +164,7 @@ class View extends \Gcms\View
           'module' => $index->module,
           'topic' => $index->topic,
           'description' => $index->description,
-          'keywords' => $index->keywords,
+          'keywords' => $index->keywords.','.$index->topic,
           'detail' => $detail->render()
       );
     }

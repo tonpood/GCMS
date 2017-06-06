@@ -43,7 +43,7 @@ class Model extends \Kotchasan\Orm\Field
       $where = array(
         array('I.id', (int)$index->index_id),
       );
-    } else {
+    } elseif (isset($index->module_id) && isset($index->index_id)) {
       $where = array(
         array('I.module_id', (int)$index->module_id),
         array('I.id', (int)$index->index_id)
