@@ -82,7 +82,7 @@ class Controller extends \Gcms\Controller
         }
         $contents['/{ADMIN}/'] = Login::isAdmin() && $user->fb == 0 ? '' : 'readonly';
         $contents['/{HIDDEN}/'] = implode("\n", Form::get2Input());
-        $contents['/{ACCEPT}/'] = Mime::getEccept(self::$cfg->user_icon_typies);
+        $contents['/{ACCEPT}/'] = Mime::getAccept(self::$cfg->user_icon_typies);
         $template->add($contents);
         Gcms::$view->setContentsAfter(array(
           '/:type/' => implode(', ', self::$cfg->user_icon_typies)

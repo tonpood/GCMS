@@ -44,7 +44,7 @@ class View extends \Gcms\View
     $contents = array(
       '/<NEWREGISTER>(.*)<\/NEWREGISTER>/isu' => $request->request('action')->toString() === 'newregister' ? '\\1' : '',
       '/<IDCARD>(.*)<\/IDCARD>/isu' => empty(self::$cfg->member_idcard) ? '' : '\\1',
-      '/{ACCEPT}/' => Mime::getEccept(self::$cfg->user_icon_typies)
+      '/{ACCEPT}/' => Mime::getAccept(self::$cfg->user_icon_typies)
     );
     // ข้อมูลฟอร์ม
     foreach ($user as $key => $value) {

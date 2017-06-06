@@ -60,7 +60,7 @@ class Amp extends \Gcms\Baseview
           }
         }
         if ($tag == 'img') {
-          if (!isset($attributes['width'])) {
+          if (!isset($attributes['width']) && is_file($attributes['src'])) {
             $size = @getimagesize($attributes['src']);
             if ($size) {
               $attributes['width'] = $size[0];

@@ -250,7 +250,7 @@ class Gcms extends \Kotchasan\KBase
     }
     $link = preg_replace($patt, $replace, self::$urls[self::$cfg->module_url]);
     if (!empty($query)) {
-      $link = strpos('?', $link) === false ? $link.'?'.$query : $link.'&amp;'.$query;
+      $link .= (strpos($link, '?') === false ? '?' : '&amp;').$query;
     }
     return WEB_URL.$link;
   }
