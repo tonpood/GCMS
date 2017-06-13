@@ -60,8 +60,7 @@ class Curl
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_USERAGENT => 'Googlebot/2.1 (+http://www.google.com/bot.html)',
       CURLOPT_SSL_VERIFYHOST => false,
-      CURLOPT_SSL_VERIFYPEER => false,
-      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_SSL_VERIFYPEER => false
     );
   }
 

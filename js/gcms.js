@@ -187,6 +187,8 @@ var doLoginSubmit = function (xhr) {
         }
       } else if (ds.action == 1) {
         window.location = replaceURL('action', 'login');
+      } else if (/^http.*/.test(ds.action)) {
+        window.location = ds.action;
       }
     }
     if (ds.content) {

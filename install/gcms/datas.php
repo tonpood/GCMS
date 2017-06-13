@@ -69,7 +69,6 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUE
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('You can post a maximum of %COUNT% times per day','text','friends','0','สามารถโพสต์ได้ไม่เกิน %COUNT% ครั้ง ต่อวัน','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Contact Information','text','product','0','ติดต่อสอบถาม','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Images shown in the catalog of products','text','product','0','รูปภาพแสดงในหน้าแคตตาล็อกของสินค้า','');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Members of this group can create or edit product details','text','product','0','สมาชิกในกลุ่มนี้สามารถเขียนหรือแก้ไขรายละเอียดของสินค้าได้','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Net Price','text','product','0','ราคาสุทธิ','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Pictures displayed at the product details page','text','product','0','รูปภาพแสดงในหน้ารายละเอียดของสินค้า','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Price','text','product','0','ราคา','');

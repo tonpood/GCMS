@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}_product_price` (`id` int(11) unsigned NOT N
 DELETE FROM `{prefix}_language` WHERE `owner` = 'product';
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Contact Information','text','product','0','ติดต่อสอบถาม','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Images shown in the catalog of products','text','product','0','รูปภาพแสดงในหน้าแคตตาล็อกของสินค้า','');
-INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Members of this group can create or edit product details','text','product','0','สมาชิกในกลุ่มนี้สามารถเขียนหรือแก้ไขรายละเอียดของสินค้าได้','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Net Price','text','product','0','ราคาสุทธิ','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Pictures displayed at the product details page','text','product','0','รูปภาพแสดงในหน้ารายละเอียดของสินค้า','');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`) VALUES ('Product','text','product','0','สินค้า','');
