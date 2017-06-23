@@ -34,9 +34,10 @@ class Model extends \Kotchasan\Model
         'email' => $request->post('email')->url(),
         'website' => str_replace(array('http://', 'https://', 'www.'), '', $request->post('link')->url()),
       );
+      $fb_id = $request->post('id')->number();
       // ไม่มีอีเมล์ ใช้ id ของ Facebook
       if (empty($save['email'])) {
-        $save['email'] = $request->post('id')->number();
+        $save['email'] = $fb_id;
       }
       $save['displayname'] = $save['fname'];
       // db
