@@ -235,6 +235,11 @@ class Model extends \Kotchasan\Model
           $request->removeToken();
           // คืนค่า url ของบอร์ด
           $ret['location'] = WEB_URL.'index.php?module='.$index->module.'&id='.$id.'&visited='.$mktime;
+          // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีโพสต์ใหม่
+          if (!empty($index->line_notifications) && in_array(1, $index->line_notifications)) {
+            $msg = Language::get('BOARD_NOTIFICATIONS');
+            \Gcms\Line::send($msg[1].' '.$ret['location']);
+          }
         }
       }
       // คืนค่าเป็น JSON

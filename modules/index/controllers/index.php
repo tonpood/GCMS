@@ -116,6 +116,7 @@ class Controller extends \Kotchasan\Controller
         'generator' => '<meta name=generator content="GCMS AJAX CMS design by https://gcms.in.th">',
         'og:title' => '<meta property="og:title" content="'.$page->topic.'">',
         'description' => '<meta name=description content="'.$page->description.'">',
+        'og:description' => '<meta name="og:description" content="'.$page->description.'">',
         'keywords' => '<meta name=keywords content="'.$page->keywords.'">',
         'og:site_name' => '<meta property="og:site_name" content="'.strip_tags(self::$cfg->web_title).'">',
         'og:type' => '<meta property="og:type" content="article">'

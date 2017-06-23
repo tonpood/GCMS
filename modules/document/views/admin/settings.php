@@ -226,6 +226,18 @@ class View extends \Gcms\Adminview
       'previewSrc' => $document_icon,
     ));
     $fieldset = $form->add('fieldset', array(
+      'title' => '{LNG_Notifications}'
+    ));
+    // line_notifications
+    $fieldset->add('checkboxgroups', array(
+      'id' => 'line_notifications',
+      'labelClass' => 'g-input icon-comments',
+      'itemClass' => 'item',
+      'label' => '{LNG_Send a message to the Line when}',
+      'options' => Language::get('DOCUMENT_NOTIFICATIONS'),
+      'value' => isset($index->line_notifications) ? $index->line_notifications : array()
+    ));
+    $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Role of Members}'
     ));
     // สถานะสมาชิก
@@ -259,7 +271,7 @@ class View extends \Gcms\Adminview
       $check = isset($index->can_write) && is_array($index->can_write) && in_array($i, $index->can_write) ? ' checked' : '';
       $row[] = array(
         'class' => 'center',
-        'text' => $i > -1 && $i != 1 ? '<label data-text="{LNG_Writing}"><input type=checkbox name=can_write[] title="{LNG_Members of this group can create the content}" value='.$i.$check.'></label>' : ''
+        'text' => $i > -1 && $i != 1 ? '<label data-text="{LNG_Writing}"><input type=checkbox name=can_write[] title="{LNG_Members of this group can create or edit}" value='.$i.$check.'></label>' : ''
       );
       $check = isset($index->moderator) && is_array($index->moderator) && in_array($i, $index->moderator) ? ' checked' : '';
       $row[] = array(

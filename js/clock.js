@@ -21,8 +21,8 @@
       }
       this.hour_offset = 0;
       this.display = $E(id);
-      if (this.display.innerHTML == '') {
-        this.display.innerHTML = new Date().format('H:I:S');
+      if (this._getDisplay() == '') {
+        this._setDisplay(new Date().format('H:I:S'));
       }
       var temp = this;
       this.clock = window.setInterval(function () {
@@ -38,14 +38,14 @@
       if (Hour >= 24) {
         Hour = 0;
       }
-      this.display.innerHTML = Hour.toString().leftPad(2, '0') + ':' + Minute.toString().leftPad(2, '0') + ':' + Second.toString().leftPad(2, '0');
+      this._setDisplay(Hour.toString().leftPad(2, '0') + ':' + Minute.toString().leftPad(2, '0') + ':' + Second.toString().leftPad(2, '0'));
       return this;
     },
     stop: function () {
       window.clearInterval(this.clock);
     },
     _updateTime: function () {
-      var ds = this.display.innerHTML.split(':');
+      var ds = this._getDisplay().split(':');
       var Hour = parseFloat(ds[0]);
       var Minute = parseFloat(ds[1]);
       var Second = parseFloat(ds[2]);
@@ -77,9 +77,23 @@
           Hour = 0;
         }
       }
-      this.display.innerHTML = Hour.toString().leftPad(2, '0') + ':' + Minute.toString().leftPad(2, '0') + ':' + Second.toString().leftPad(2, '0');
+      this._setDisplay(Hour.toString().leftPad(2, '0') + ':' + Minute.toString().leftPad(2, '0') + ':' + Second.toString().leftPad(2, '0'));
       if (Object.isFunction(this.options.onTimer)) {
         this.options.onTimer.call(this, Hour, Minute, Second);
+      }
+    },
+    _getDisplay: function () {
+      if (this.display.innerHTML) {
+        return  this.display.innerHTML;
+      } else if (this.display.value) {
+        return     this.display.value;
+      }
+    },
+    _setDisplay: function (val) {
+      if (this.display.innerHTML) {
+        this.display.innerHTML = val;
+      } else if (this.display.value) {
+        this.display.value = val;
       }
     }
   };

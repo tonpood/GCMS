@@ -64,7 +64,7 @@ class Model extends \Kotchasan\KBase
           }
         }
         // other
-        foreach (array('google_site_verification', 'google_profile', 'msvalidate', 'facebook_appId') as $item) {
+        foreach (array('google_site_verification', 'google_profile', 'msvalidate', 'facebook_appId', 'line_api_key') as $item) {
           $value = $request->post($item)->text();
           if (empty($value)) {
             unset($config->$item);

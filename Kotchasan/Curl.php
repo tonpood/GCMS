@@ -18,12 +18,6 @@ namespace Kotchasan;
 class Curl
 {
   /**
-   * URL of the session
-   *
-   * @var string
-   */
-  protected $url;
-  /**
    * พารามิเตอร์ CURLOPT
    *
    * @var array
@@ -37,25 +31,29 @@ class Curl
   protected $headers = array();
   /**
    * ตัวแปรสำหรับเก็บ Error ที่มาจาก cURL
-   * สำเร็จ คืนค่า false
-   * ไม่สำเร็จ คืนค่าข้อความ error
+   * 0 ไม่มี error (ค่าเริ่มต้น)
+   * มากกว่า 0 Error No. ของ cURL
    *
-   * @var boolean|string
+   * @var int
    */
-  protected $error = false;
+  protected $error = 0;
+  /**
+   * ข้อความ Error จาก cURL หากมีข้อผิดพลาดในการส่ง
+   *
+   * @var string
+   */
+  protected $errorMessage = '';
 
   /**
    * Construct
    *
-   * @param string $url URL ที่ใช้ในการส่ง request
    * @throws \ErrorException ถ้าไม่รองรับ cURL
    */
-  public function __construct($url)
+  public function __construct()
   {
     if (!extension_loaded('curl')) {
       throw new \ErrorException('cURL library is not loaded');
     }
-    $this->url = $url;
     // default parameter
     $this->headers = array(
       'Connection' => 'keep-alive',
@@ -66,17 +64,17 @@ class Curl
     $this->options = array(
       CURLOPT_TIMEOUT => 30,
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_FAILONERROR => true,
-      CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36',
+      CURLOPT_USERAGENT => 'Googlebot/2.1 (+http://www.google.com/bot.html)',
       CURLOPT_SSL_VERIFYHOST => false,
-      CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_SSL_VERIFYPEER => false
     );
   }
 
   /**
-   * คืนค่า Error จากการ execute
+   * คืนค่า error no จากการ cURL
+   * 0 หมายถึงไม่มี error
    *
-   * @return string
+   * @return int
    * */
   function error()
   {
@@ -84,81 +82,96 @@ class Curl
   }
 
   /**
+   * คืนค่าข้อความ Error จาก cURL หากมีข้อผิดพลาดในการส่ง
+   *
+   * @return string
+   * */
+  function errorMessage()
+  {
+    return $this->errorMessage;
+  }
+
+  /**
    * DELETE
    *
+   * @param string $url
    * @param array $params
-   * @return $this
+   * @return string
    */
-  public function delete($params)
+  public function delete($url, $params)
   {
     if (is_array($params)) {
       $this->options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
       $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, NULL, '&');
     }
-    return $this;
+    return $this->execute($url);
   }
 
   /**
    * GET
    *
+   * @param string $url
    * @param array $params
-   * @return $this
+   * @return string
    */
-  public function get($params = array())
+  public function get($url, $params = array())
   {
     $this->options[CURLOPT_CUSTOMREQUEST] = 'GET';
     $this->options[CURLOPT_HTTPGET] = true;
     if (is_array($params)) {
-      $this->url .= (strpos($this->url, '?') === false ? '?' : '&').http_build_query($params, NULL, '&');
+      $url .= (strpos($url, '?') === false ? '?' : '&').http_build_query($params, NULL, '&');
     }
-    return $this;
+    return $this->execute($url);
   }
 
   /**
    * HEAD
    *
+   * @param string $url
    * @param array $params
-   * @return $this
+   * @return string
    */
-  public function head($params = array())
+  public function head($url, $params = array())
   {
     $this->options[CURLOPT_CUSTOMREQUEST] = 'HEAD';
     $this->options[CURLOPT_NOBODY] = true;
     if (is_array($params)) {
       $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, NULL, '&');
     }
-    return $this;
+    return $this->execute($url);
   }
 
   /**
    * POST
    *
+   * @param string $url
    * @param array $params
-   * @return $this
+   * @return string
    */
-  public function post($params = array())
+  public function post($url, $params = array())
   {
     $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
     $this->options[CURLOPT_POST] = true;
     if (is_array($params)) {
       $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, NULL, '&');
     }
-    return $this;
+    return $this->execute($url);
   }
 
   /**
    * PUT
    *
+   * @param string $url
    * @param array $params
-   * @return $this
+   * @return string
    */
-  public function put($params = array())
+  public function put($url, $params = array())
   {
     $this->options[CURLOPT_CUSTOMREQUEST] = 'PUT';
     if (is_array($params)) {
       $this->options[CURLOPT_POSTFIELDS] = http_build_query($params, NULL, '&');
     }
-    return $this;
+    return $this->execute($url);
   }
 
   /**
@@ -208,6 +221,19 @@ class Curl
   }
 
   /**
+   * กำหนดค่า cookie file
+   *
+   * @param string $cookiePath
+   * @return $this
+   */
+  public function setCookie($cookiePath)
+  {
+    $this->options[CURLOPT_COOKIEFILE] = $cookiePath;
+    $this->options[CURLOPT_COOKIEJAR] = $cookiePath;
+    return $this;
+  }
+
+  /**
    * กำหนด Header
    *
    * @param array $headers
@@ -238,12 +264,13 @@ class Curl
   /**
    * ประมวลผล cURL
    *
+   * @param string $url
    * @return string
    */
-  public function execute()
+  protected function execute($url)
   {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $this->url);
+    curl_setopt($ch, CURLOPT_URL, $url);
     if (!empty($this->headers)) {
       $headers = array();
       foreach ($this->headers as $key => $value) {
@@ -255,8 +282,9 @@ class Curl
       curl_setopt($ch, $key, $value);
     }
     $response = curl_exec($ch);
-    if (!$response) {
-      $this->error = curl_error($ch).' ['.curl_errno($ch).']';
+    if (curl_error($ch)) {
+      $this->error = curl_errno($ch);
+      $this->errorMessage = curl_error($ch);
     }
     curl_close($ch);
     return $response;

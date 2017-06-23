@@ -1,0 +1,55 @@
+เทคนิคการส่งค่าตัวแปรแอเรย์จาก Javascript ไปยัง PHP ด้วย Ajax
+
+การส่งค่าตัวแปรแบบเแอเรย์ของ Javascript ไปยัง PHP ด้วย Ajax สามารถทำได้ง่ายๆ ดังตัวอย่าง (คำอธิบายอยู่ในโค้ดเลยนะครับ)
+
+คำสั่ง Javascriot ที่ใช้ในการส่ง
+[code=script]// ตัวแปร Javascript แบบแอเรย์
+var datas = ['one', 'two', 'three'];
+// แปลงแอเรย์เป็นข้อมูลชนิด JSON String
+var jsonDatas = JSON.stringify(datas);
+// ส่งค่าไปยัง Server ที่ method \Index\Demo\Model->send() ด้วย Ajax
+new GAjax().send('index.php/index/model/demo/send', 'datas=' + jsonDatas, function (xhr) {
+  // รับค่ากลับจาก Ajax
+  alert(xhr.responseText);
+});[/code]
+ไฟล์ PHP โมเดลสำหรับรับค่าที่ส่งมาจาก Ajax (modules/index/models/demo.php)
+[code=php]<?php
+/**
+ * @filesource modules/index/models/demo.php
+ * @link http://www.kotchasan.com/
+ * @copyright 2016 Goragod.com
+ * @license http://www.kotchasan.com/license/
+ */
+
+namespace Index\Demo;
+
+use \Kotchasan\Http\Request;
+
+/**
+ * โมเดลสำหรับรับค่าที่ส่งมาจาก Ajax
+ *
+ * @author Goragod Wiriya <admin@goragod.com>
+ *
+ * @since 1.0
+ */
+class Model
+{
+
+  /**
+   * เมธอดรับข้อมูลจาก Ajax
+   *
+   * @param Request $request
+   */
+  public function send(Request $request)
+  {
+    // ฟังก์ชั่นตรวจสอบว่าส่งมาจากภายในไซต์เดียวกัน
+    if ($request->isReferer()) {
+      // รับค่าที่ส่งมาจาก Ajax
+      $datas = $request->post('datas')->toString();
+      // แปลงข้อมูลกลับเป็นแอเรย์
+      $array = json_decode(stripslashes($datas));
+      // คืนค่าแอเรย์ที่แปลงได้กลับไปที่ xhr.responseText
+      print_r($array);
+    }
+  }
+}[/code]

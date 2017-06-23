@@ -1,0 +1,134 @@
+ตัวอย่างการดาวน์โหลดไฟล์ text จากข้อมูลในฐานข้อมูล สามารถประยุกต์ใช้ในการดาวน์โหลดไฟล์ประเภทใดก็ได้<br>
+<br>
+อันดับแรก สร้างลิงค์สำหรับดาวน์โหลดไฟล์ ชี้ไปที่ไฟล์ download.php ซึ่งสามารถสร้างด้วยวิธีใดก็ได้นะครับ ตัวอย่างนี้เป็นการแสดงให้เห็นการสร้างลิงค์ไปที่ไฟล์ download.php เฉยๆ<br>
+[code=html]&lt;a href=&quot;download.php?id=1&quot;&gt;Download&lt;/a&gt;[/code]<br>
+เสร็จแล้วสร้างไฟล์ download.php มีโค้ดตามด้านล่างนี่แหละครับ<br>
+[code=php]&lt;?php<br>
+/**<br>
+&nbsp;* @filesource download.php.<br>
+&nbsp;*<br>
+&nbsp;* @author Goragod Wiriya &lt;admin@goragod.com&gt;<br>
+&nbsp;* @link http://www.kotchasan.com/<br>
+&nbsp;* @copyright 2016 Goragod.com<br>
+&nbsp;* @license http://www.kotchasan.com/license/<br>
+&nbsp;*/<br>
+/**<br>
+&nbsp;* 0 (default )บันทึกข้อผิดพลาดร้ายแรงลง error_log .php<br>
+&nbsp;* 1 บันทึกข้อผิดพลาดและคำเตือนลง error_log .php<br>
+&nbsp;* 2 แสดงผลข้อผิดพลาดและคำเตือนออกทางหน้าจอ (ใช้เฉพาะตอนออกแบบเท่านั้น)<br>
+&nbsp;*/<br>
+define(&#39;DEBUG&#39;, 2);<br>
+<br>
+/**<br>
+&nbsp;* false (default)<br>
+&nbsp;* true บันทึกการ query ฐานข้อมูลลง log (ใช้เฉพาะตอนออกแบบเท่านั้น)<br>
+&nbsp;*/<br>
+define(&#39;DB_LOG&#39;, false);<br>
+<br>
+// load Kotchasan<br>
+include &#39;Kotchasan/load.php&#39;;<br>
+// Initial Kotchasan Framework<br>
+$req = Kotchasan::createWebApplication();<br>
+<em>$req-&gt;defaultController = &#39;Index\Download\Controller&#39;;</em><br>
+$req-&gt;run();[/code]<br>
+ไฟล์นี้จะมีเนื้อหาเหมือนกับไฟล์ index.php ปกติแหละครับ เพียงแต่มีสิ่งที่เพิ่มเติมขึ้นมาคือการกำหนด defaultController ไปยัง Index\Download\Controller แทนค่า default ซึ่งปกติจะเป็นของหน้าหลักอยู่<br>
+<br>
+สำหรับคลาส&nbsp;Index\Download\Controller คือไฟล์&nbsp;modules/index/controllers/download.php มีโค้ดตามด้านล่าง คลาสนี้จะทำการอ่านข้อมูลที่เลือกจาก Model และทำการส่งออกเป็นไฟล์ดาวน์โหลดด้วยการกำหนด header เป็น&nbsp;application/octet-stream ด้วย Response คลาส<br>
+[code=php]&lt;?php<br>
+/**<br>
+&nbsp;* @filesource modules/index/controllers/download.php<br>
+&nbsp;* @link http://www.kotchasan.com/<br>
+&nbsp;* @copyright 2016 Goragod.com<br>
+&nbsp;* @license http://www.kotchasan.com/license/<br>
+&nbsp;*/<br>
+<br>
+namespace Index\Download;<br>
+<br>
+use \Kotchasan\Http\Request;<br>
+use \Kotchasan\Http\Response;<br>
+<br>
+/**<br>
+&nbsp;* default Controller<br>
+&nbsp;*<br>
+&nbsp;* @author Goragod Wiriya &lt;admin@goragod.com&gt;<br>
+&nbsp;*<br>
+&nbsp;* @since 1.0<br>
+&nbsp;*/<br>
+class Controller extends \Kotchasan\Controller<br>
+{<br>
+<br>
+&nbsp; /**<br>
+&nbsp; &nbsp;* คลาสสำหรับดาวน์โหลดไฟล์<br>
+&nbsp; &nbsp;*<br>
+&nbsp; &nbsp;* @param Request $request<br>
+&nbsp; &nbsp;*/<br>
+&nbsp; public function index(Request $request)<br>
+&nbsp; {<br>
+&nbsp; &nbsp; // รับค่าจาก $_GET[&#39;id&#39;]<br>
+&nbsp; &nbsp; $id = $request-&gt;get(&#39;id&#39;)-&gt;toInt();<br>
+&nbsp; &nbsp; // อ่านข้อมูลจากฐานข้อมูล<br>
+&nbsp; &nbsp; $download = \Index\Download\Model::get($id);<br>
+&nbsp; &nbsp; // create Response<br>
+&nbsp; &nbsp; $res = new Response();<br>
+&nbsp; &nbsp; // set headers<br>
+&nbsp; &nbsp; $res-&gt;withHeaders(array(<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;Content-Type&#39; =&gt; &#39;application/octet-stream&#39;,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &#39;Content-disposition&#39; =&gt; &#39;attachment; filename=&#39;.$download-&gt;name<br>
+&nbsp; &nbsp; &nbsp; ))<br>
+&nbsp; &nbsp; &nbsp; // set file contents จากคอลัมน์ text ของฐานข้อมูล<br>
+&nbsp; &nbsp; &nbsp; -&gt;withContent($download-&gt;text)<br>
+&nbsp; &nbsp; &nbsp; // create download file<br>
+&nbsp; &nbsp; &nbsp; -&gt;send();<br>
+&nbsp; }<br>
+}[/code]<br>
+ไฟล์สุดท้ายที่เกี่ยวข้องคือ Model สำหรับอ่านข้อมูลจากฐานข้อมุล Index\Download\Model หรือไฟล์&nbsp;modules/index/models/download.php<br>
+[code=php]&lt;?php<br>
+/**<br>
+&nbsp;* @filesource modules/index/models/download.php<br>
+&nbsp;* @link http://www.kotchasan.com/<br>
+&nbsp;* @copyright 2016 Goragod.com<br>
+&nbsp;* @license http://www.kotchasan.com/license/<br>
+&nbsp;*/<br>
+<br>
+namespace Index\Download;<br>
+<br>
+/**<br>
+&nbsp;* โมเดลสำหรับรับค่าที่ส่งมาจาก Ajax<br>
+&nbsp;*<br>
+&nbsp;* @author Goragod Wiriya &lt;admin@goragod.com&gt;<br>
+&nbsp;*<br>
+&nbsp;* @since 1.0<br>
+&nbsp;*/<br>
+class Model extends \Kotchasan\Model<br>
+{<br>
+<br>
+&nbsp; /**<br>
+&nbsp; &nbsp;* เมธอดอ่านข้อมูลที่ต้องการดาวน์โหลดจากฐานข้อมูล<br>
+&nbsp; &nbsp;*<br>
+&nbsp; &nbsp;* @param int $id<br>
+&nbsp; &nbsp;*/<br>
+&nbsp; public static function get($id)<br>
+&nbsp; {<br>
+&nbsp; &nbsp; // create Model<br>
+&nbsp; &nbsp; $model = new static;<br>
+&nbsp; &nbsp; // SELECT * FROM `download` WHERE `id`=$id LIMIT 1<br>
+&nbsp; &nbsp; return $model-&gt;db()-&gt;first($model-&gt;getTableName(&#39;download&#39;), (int)$id);<br>
+&nbsp; }<br>
+}[/code]<br>
+สำหรับโครงสร้างของฐานข้อมูล download ตามตัวอย่างนี้จะเก็บข้อมูลประมาณนี้
+<table class="data border">
+	<thead>
+		<tr>
+			<th scope="col">`id` (INT)</th>
+			<th scope="col">`text` (TEXT)</th>
+			<th scope="col">`name` (VARCHAR)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="center">1</td>
+			<td>ข้อมูลในไฟล์ text</td>
+			<td class="center">text.txt</td>
+		</tr>
+	</tbody>
+</table>

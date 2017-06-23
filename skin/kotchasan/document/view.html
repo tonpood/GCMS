@@ -5,14 +5,6 @@
       <ul>{BREADCRUMBS}</ul>
     </nav>
   </header>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-7053011825528736"
-       data-ad-slot="8866730549"
-       data-ad-format="auto"></ins>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
   <div id=document-view>
     <div class=bdr_content>
       <div class="q post-detail">
@@ -20,7 +12,17 @@
           <a class="icon-print print-{QID}-0-0-{MODULE}" title="{LNG_Print page}"></a>
           <a class="icon-quote quote-{QID}-0-0-{MODULE}" title="{LNG_Quote}"></a>
         </p>
-        <div>{DETAIL}</div>
+        <div style="float:left;margin:0 10px 10px 0;">
+          <ins class="adsbygoogle"
+               style="display:block;width:336px;height:280px;"
+               data-ad-client="ca-pub-7053011825528736"
+               data-ad-slot="8866730549"
+               data-ad-format="auto"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        {DETAIL}
         <footer class="reaction cuttext">
           {LNG_Writer} <a class="icon-user status{STATUS}" href="{WEBURL}index.php?module=member&amp;id={UID}">{DISPLAYNAME}</a>
           <time class="icon-create create" title="{LNG_Posted}">{DATE {DATE}}</time>
@@ -35,14 +37,16 @@
       <header><h3 class=icon-tags>{LNG_Related}</h3></header>
       {WIDGET_RELATE module={MODULE};id={QID};cols=2;rows=3}
     </section>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-7053011825528736"
-         data-ad-slot="8866730549"
-         data-ad-format="auto"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <div class="center">
+      <ins class="adsbygoogle"
+           style="display:block;height:30px;"
+           data-ad-client="ca-pub-7053011825528736"
+           data-ad-slot="6945213749"
+           data-ad-format="link"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
     <div id=comment-list>{COMMENTLIST}</div>
     {REPLYFORM}
   </div>
