@@ -163,6 +163,11 @@ class Model extends \Kotchasan\Model
             $request->removeToken();
             // reload
             $location = WEB_URL.'index.php?module='.$index->module.'&id='.$index_id.'&visited='.$mktime;
+            // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีความคิดเห็นใหม่
+            if (!empty($index->line_notifications) && in_array(3, $index->line_notifications)) {
+              $msg = Language::get('DOCUMENT_NOTIFICATIONS');
+              \Gcms\Line::send($msg[3].' '.$location.'#R_'.$id);
+            }
             $location .= self::$cfg->use_ajax == 1 ? "&to=R_$id" : "#R_$id";
             $ret['location'] = $location;
           }

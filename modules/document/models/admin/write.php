@@ -214,6 +214,18 @@ class Model extends \Kotchasan\Model
               $ret['location'] = $request->getUri()->postBack('index.php', array('mid' => $index['module_id'], 'module' => 'document-setup'));
               // clear
               $request->removeToken();
+              // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีการเขียนหรือแก้ไขบทความ
+              if (!empty($index['line_notifications'])) {
+                if (empty($id) && in_array(1, $index['line_notifications'])) {
+                  // เขียน
+                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
+                  \Gcms\Line::send($msg[1].' '.WEB_URL.'index.php?module='.$index['module'].'&id='.$index['id']);
+                } elseif (!empty($id) && in_array(2, $index['line_notifications'])) {
+                  //  แก้ไข
+                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
+                  \Gcms\Line::send($msg[2].' '.WEB_URL.'index.php?module='.$index['module'].'&id='.$index['id']);
+                }
+              }
             } elseif ($tab) {
               $ret['tab'] = $tab;
             }

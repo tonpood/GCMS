@@ -115,6 +115,19 @@ class View extends \Gcms\Adminview
       'value' => 1
     ));
     $fieldset = $form->add('fieldset', array(
+      'titleClass' => 'icon-comments',
+      'title' => '{LNG_LINE Notify}'
+    ));
+    // line_api_key
+    $fieldset->add('text', array(
+      'id' => 'line_api_key',
+      'labelClass' => 'g-input icon-password',
+      'itemClass' => 'item',
+      'label' => '{LNG_Access Token}',
+      'comment' => '{LNG_Generate access token (For developers)} <a href="https://notify-bot.line.me/th/" class=icon-help></a>',
+      'value' => isset($config->line_api_key) ? $config->line_api_key : ''
+    ));
+    $fieldset = $form->add('fieldset', array(
       'class' => 'submit'
     ));
     // submit

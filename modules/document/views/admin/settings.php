@@ -226,6 +226,18 @@ class View extends \Gcms\Adminview
       'previewSrc' => $document_icon,
     ));
     $fieldset = $form->add('fieldset', array(
+      'title' => '{LNG_Notifications}'
+    ));
+    // line_notifications
+    $fieldset->add('checkboxgroups', array(
+      'id' => 'line_notifications',
+      'labelClass' => 'g-input icon-comments',
+      'itemClass' => 'item',
+      'label' => '{LNG_Send a message to the Line when}',
+      'options' => Language::get('DOCUMENT_NOTIFICATIONS'),
+      'value' => isset($index->line_notifications) ? $index->line_notifications : array()
+    ));
+    $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_Role of Members}'
     ));
     // สถานะสมาชิก

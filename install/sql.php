@@ -108,6 +108,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Be the first one','text','index','0','เพิ่มโพสต์เป็นคนแรก','','まだ投稿はありません');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Birthday','text','index','0','วันเกิด','','誕生日');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Board','text','index','0','เว็บบอร์ด','','ニュース');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('BOARD_NOTIFICATIONS','array','index','0','a:2:{i:1;s:36:"มีกระทู้ใหม่";i:2;s:51:"มีความคิดเห็นใหม่";}','a:2:{i:1;s:9:"new posts";i:2;s:12:"new comments";}','a:2:{i:1;s:15:"新しい投稿";i:2;s:21:"新しいコメント";}');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('BOOLEANS','array','index','0','a:2:{i:0;s:27:"ปิดใช้งาน";i:1;s:30:"เปิดใช้งาน";}','a:2:{i:0;s:7:"Disable";i:1;s:6:"Enable";}','a:2:{i:0;s:3:"無";i:1;s:3:"有";}');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Border color','text','index','0','สีของกรอบ','','枠線の色');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Brief details about the file. (Page may be downloaded).','text','index','0','รายละเอียดสั้นๆเกี่ยวกับไฟล์ (อาจใช้แสดงในหน้าดาวน์โหลดได้)','','ファイルの説明を記入して下さい（ダウンロードのページに表示）');
@@ -213,6 +214,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Do you want to import the database?','text','index','0','คุณต้องการนำเข้าฐานข้อมูล ?','','データベースにインポートしても宜しいですか？');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Document number','text','index','0','เลขที่เอกสาร','','管理番号');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Document title','text','index','0','ชื่อเอกสาร','','タイトル');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('DOCUMENT_NOTIFICATIONS','array','index','0','a:3:{i:1;s:45:"เพิ่มเรื่องใหม่";i:2;s:33:"แก้ไขเรื่อง";i:3;s:45:"ความคิดเห็นใหม่";}','a:3:{i:1;s:19:"write a new article";i:2;s:16:"edit the article";i:3;s:12:"new comments";}','a:3:{i:1;s:24:"新しい記事を書く";i:2;s:21:"記事を編集する";i:3;s:21:"新しいコメント";}');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Download','text','index','0','ดาวน์โหลด','','ダウンロード');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Download Details','text','index','0','รายละเอียดการดาวน์โหลด','','ダウンロードの詳細');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Download file','text','index','0','ไฟล์ดาวน์โหลด','','ファイルのダウンロード');
@@ -274,6 +276,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Gallery','text','index','0','แกลอรี่','','ギャラリー');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('General','text','index','0','ทั่วไป','','全般');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('General Site Settings','text','index','0','ตั้งค่าพื้นฐานของเว็บไซต์','','基本的なサイトの設定');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Generate access token (For developers)','text','index','0','ออก Access Token (สำหรับผู้พัฒนา)','','アクセストークンの発行(開発者向け)');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Get new password','text','index','0','ขอรหัสผ่าน','','パスワードを変更する');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Go to Homepage','text','index','0','ไปหน้าหลักเว็บไซต์','','ホームページへ');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('go to page','text','index','0','ไปหน้าที่','','ページに移動');
@@ -403,6 +406,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('not a registered user','text','index','0','ไม่พบสมาชิกนี้ลงทะเบียนไว้','','登録メンバーではありません');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Notes or Additional Notes','text','index','0','คำอธิบายหรือหมายเหตุเพิ่มเติม','','注意事項などを記入して下さい');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Notes or short description of the link','text','index','0','หมายเหตุหรือคำอธิบายเกี่ยวกับลิ้งค์ สั้นๆ','','リンクの説明または注意事項を記入して下さい');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Notifications','text','index','0','การแจ้งเตือน','','通知');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Number','text','index','0','จำนวน','','番号');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other','text','index','0','อื่นๆ','','その他');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Other details','text','index','0','รายละเอียดอื่นๆ','','その他の詳細');
@@ -464,6 +468,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Register successfully, We have sent complete registration information to :email','text','index','0','ลงทะเบียนสมาชิกใหม่เรียบร้อย เราได้ส่งข้อมูลการลงทะเบียนไปยัง :email เรียบร้อยแล้ว','','登録が完了しました。:emailに登録完了のお知らせをお送りしましたので後ほどご確認下さい');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('REGISTER_CONFIRM','text','index','0','<dt>ข้อตกลงการสมัครสมาชิก</dt><dd>1. การสมัครสมาชิกเพื่อสามารถร่วมกิจกรรมกับเว็บไซต์ได้อย่างสมบูรณ์</dd><dd>2. การสมัครสมาชิกต้องใช้อีเมล์จริงที่ติดต่อได้ เนื่องจากจะมีการส่งการยืนยันการสมัครไปกับอีเมล์ที่ลงทะเบียนไว้ หรือใช้สำหรับการขอรหัสผ่านใหม่</dd><dd>3. ทางเว็บไซต์ ยึดถือนโยบายส่วนบุคคล ข้อมูลส่วนตัวจะไม่ถูกเปิดเผยนอกจากข้อมูลที่จำเป็นสำหรับการยืนยันตัวตนเป็นกรณีไป</dd><dd>4. เมื่อได้อ่านและยอมรับข้อตกลงนี้กรุณา เลือก <strong>ยอมรับ</strong> ด้านล่าง</dd>','<dt> Subscription Agreement</dt><dd>1. Membership to the site can participate fully</dd><dd>2. Membership requires a real e-mail contact. Due to be sent to the email confirmation that your registration. Or to request a new password</dd><dd>3. The site adheres Privacy Policy. Personal information will not be disclosed except the information required for identity verification is the case, the</dd><dd>4. When you read and accept this Agreement, please select <strong>accepted</strong> below</dd>','<dt>利用規約</dt><dd>1. メンバーは、本サイトへの登録を通じて完全な参加が保証されます。</dd><dd>2. 本サイトへの登録に際しては、確認メール及びパスワード再発行の送信先として、実際に利用されているメールアドレスが必要となります。</dd><dd>3. 本サイトの個人情報保護方針により、ご提供頂いた個人情報は、法的義務を伴う要請を受けた場合を除き、第三者に開示されることはありません。</dd><dd>4. 本規約をお読みになり、ご理解頂いた場合に限り、<strong>規約に同意する</strong>にチェックを入れて下さい。</dd>');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Registration information sent to :email complete. We will take you to edit your profile','text','index','0','ได้ส่งข้อมูลการลงทะเบียนไปยัง :email เรียบร้อยแล้ว เราจะพาคุณไปแก้ไขข้อมูลส่วนตัว','','登録完了のお知らせを:emailに送信しました。あなたのプロファイルが更新されるのをお待ちしております。');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Related','text','index','0','เรื่องที่เกี่ยวข้อง','','関連する');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Remember me','text','index','0','จำการเข้าระบบ','','記憶させる');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Removal request','text','index','0','ส่งคำขอให้ลบ','','削除要求');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Remove','text','index','0','ลบ','','削除');
@@ -500,6 +505,7 @@ INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`)
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('SELECT_ALL','text','index','1','เลือกทั้งหมด','select all','全て選択');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('SELECT_NONE','text','index','1','ไม่เลือกรายการใดเลย','select none','チェックを外す');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Send a message to the :name','text','index','0','ส่งข้อความถึง :name','',':nameに連絡');
+INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Send a message to the Line when','text','index','0','ส่งข้อความไปยังไลน์เมื่อ','','いつ行にメッセージを送信する');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Send an email to members','text','index','0','ส่งอีเมล์แจ้งไปยังสมาชิกด้วย','','メンバーにメールを送信します');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Send Comment','text','index','0','ส่งความคิดเห็น','','コメント送信');
 INSERT INTO `{prefix}_language` (`key`, `type`, `owner`, `js`, `th`, `en`, `ja`) VALUES ('Send confirmation email','text','index','0','ส่งอีเมล์ยืนยันสมาชิก','','確認メールを送信する');

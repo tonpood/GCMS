@@ -207,6 +207,18 @@ class Model extends \Kotchasan\Model
               if ($save['category_id'] > 0) {
                 \Document\Admin\Write\Model::updateCategories((int)$index['module_id']);
               }
+              // ส่งข้อความแจ้งเตือนไปยังไลน์เมื่อมีการเขียนหรือแก้ไขบทความ
+              if (!empty($index['line_notifications'])) {
+                if (empty($id) && in_array(1, $index['line_notifications'])) {
+                  // เขียน
+                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
+                  \Gcms\Line::send($msg[1].' '.WEB_URL.'index.php?module='.$index['module'].'&id='.$index['id']);
+                } elseif (!empty($id) && in_array(2, $index['line_notifications'])) {
+                  //  แก้ไข
+                  $msg = Language::get('DOCUMENT_NOTIFICATIONS');
+                  \Gcms\Line::send($msg[2].' '.WEB_URL.'index.php?module='.$index['module'].'&id='.$index['id']);
+                }
+              }
               // ส่งค่ากลับ
               $ret['alert'] = Language::get('Saved successfully');
               $ret['location'] = 'back';

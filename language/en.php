@@ -1,6 +1,10 @@
 <?php
 /* language/en.php */
 return array(
+  'BOARD_NOTIFICATIONS' => array(
+    1 => 'new posts',
+    2 => 'new comments'
+  ),
   'BOOLEANS' => array(
     0 => 'Disable',
     1 => 'Enable'
@@ -27,6 +31,11 @@ return array(
     4 => 'Th',
     5 => 'Fr',
     6 => 'Sa'
+  ),
+  'DOCUMENT_NOTIFICATIONS' => array(
+    1 => 'write a new article',
+    2 => 'edit the article',
+    3 => 'new comments'
   ),
   'FROM_TIME' => 'from H:i',
   'IMG_LAW' => array(
@@ -109,7 +118,7 @@ return array(
     0 => 'Unpublished',
     1 => 'Published'
   ),
-  'REGISTER_CONFIRM' => '<dt>Subscription Agreement</dt><dd>1. Membership to the site can participate fully</dd><dd>2. Membership requires a real e-mail contact in order to be able to send your registration confirmation to you and and in order to be able to request a new password when required.</dd><dd>3. The site adheres Privacy Policy. Personal information will not be disclosed except for when identity verification is required.</dd><dd>4. When you read and accept this Agreement, please select <strong>accepted</strong> below.</dd>',
+  'REGISTER_CONFIRM' => '<dt> Subscription Agreement</dt><dd>1. Membership to the site can participate fully</dd><dd>2. Membership requires a real e-mail contact. Due to be sent to the email confirmation that your registration. Or to request a new password</dd><dd>3. The site adheres Privacy Policy. Personal information will not be disclosed except the information required for identity verification is the case, the</dd><dd>4. When you read and accept this Agreement, please select <strong>accepted</strong> below</dd>',
   'REPLIES' => array(
     0 => 'Closing comments',
     1 => 'Can comments'
