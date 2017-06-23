@@ -124,7 +124,7 @@ class View extends \Gcms\Adminview
       'labelClass' => 'g-input icon-password',
       'itemClass' => 'item',
       'label' => '{LNG_Access Token}',
-      'comment' => '{LNG_Generate access token (For developers)} <a href="https://notify-bot.line.me/th/" class=icon-help></a>',
+      'comment' => '{LNG_Generate access token (For developers)} <a href="https://gcms.in.th/index.php?module=howto&id=367" class=icon-help></a>',
       'value' => isset($config->line_api_key) ? $config->line_api_key : ''
     ));
     $fieldset = $form->add('fieldset', array(
