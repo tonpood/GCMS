@@ -33,7 +33,7 @@ class Amp extends \Gcms\Baseview
       // widgets
       '/{WIDGET_([A-Z]+)(([_\s]+)([^}]+))?}/e' => '\Gcms\View::getWidgets(array(1=>"$1",3=>"$3",4=>"$4"))',
       /* ภาษา */
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       /* ภาษาที่ใช้งานอยู่ */
       '/{LANGUAGE}/' => \Kotchasan\Language::name()
     ));

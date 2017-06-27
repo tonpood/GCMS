@@ -40,7 +40,7 @@ class View extends \Gcms\View
     );
     $template = Template::create('member', 'member', 'forgotfrm');
     $template->add(array(
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       '/{TOPIC}/' => $index->topic,
       '/{EMAIL}/' => Login::$text_username,
       '/{WEBURL}/' => WEB_URL,

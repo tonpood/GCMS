@@ -148,7 +148,7 @@ class View extends \Gcms\View
           '/{DATE}/' => Date::format($index->create_date),
           '/{URL}/' => \Document\Index\Controller::url($index->module, $index->alias, $index->id, false),
           '/{DISPLAYNAME}/' => empty($index->displayname) ? $index->email : $index->displayname,
-          '/{LNG_([\w\s\.\-\'\(\),%\/:&\#;]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))'
+          '/{LNG_([\w\s\.\-\'\(\),%\/:&\#;]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))'
         );
         $pdf = new \Kotchasan\Pdf();
         $pdf->AddPage();

@@ -8,6 +8,8 @@
 
 namespace Gcms;
 
+use \Kotchasan\Language;
+
 /**
  * View base class สำหรับ GCMS.
  *
@@ -86,11 +88,11 @@ class View extends \Gcms\Baseview
       // จำนวน Query
       '/{QURIES}/' => \Kotchasan\Database\Driver::queryCount(),
       /* ภาษา */
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       /* วันที่ */
       '/{DATE\s([0-9\-]+(\s[0-9:]+)?)?(\s([^}]+))?}/e' => '\Gcms\View::formatDate(array(1=>"$1",4=>"$4"))',
       /* ภาษา ที่ใช้งานอยู่ */
-      '/{LANGUAGE}/' => \Kotchasan\Language::name(),
+      '/{LANGUAGE}/' => Language::name(),
       /* Javascript ท้ายเพจ */
       '/(<body.*)(<\/body>)/isu' => '$1<script>'.implode("\n", $this->script).'</script>$2',
     ));
