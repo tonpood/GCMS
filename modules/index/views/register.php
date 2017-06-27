@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource index/views/register.php
+ * @filesource modules/index/views/register.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -43,7 +43,7 @@ class View extends \Gcms\View
       '/<PHONE>(.*)<\/PHONE>/isu' => empty(self::$cfg->member_phone) ? '' : '\\1',
       '/<IDCARD>(.*)<\/IDCARD>/isu' => empty(self::$cfg->member_idcard) ? '' : '\\1',
       '/<INVITE>(.*)<\/INVITE>/isu' => empty(self::$cfg->member_invitation) ? '' : '\\1',
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       '/{TOPIC}/' => $index->topic,
       '/{TOKEN}/' => $request->createToken(),
       '/{WEBURL}/' => WEB_URL,

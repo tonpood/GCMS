@@ -83,17 +83,16 @@
       }
     },
     _getDisplay: function () {
-      if (this.display.innerHTML) {
-        return  this.display.innerHTML;
-      } else if (this.display.value) {
-        return     this.display.value;
+      if (this.display.value) {
+        return this.display.value;
       }
+      return  this.display.innerHTML;
     },
     _setDisplay: function (val) {
-      if (this.display.innerHTML) {
-        this.display.innerHTML = val;
-      } else if (this.display.value) {
+      if (this.display.value) {
         this.display.value = val;
+      } else {
+        this.display.innerHTML = val;
       }
     }
   };

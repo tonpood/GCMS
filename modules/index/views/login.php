@@ -34,7 +34,7 @@ class View extends \Gcms\View
       $template = Template::create('member', 'member', 'memberfrm');
     }
     $template->add(array(
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       '/{WEBTITLE}/' => self::$cfg->web_title,
       '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
       '/{DISPLAYNAME}/' => empty($login['displayname']) ? (empty($login['email']) ? 'Unname' : $login['email']) : $login['displayname'],
@@ -60,7 +60,7 @@ class View extends \Gcms\View
       $template = Template::create('member', 'member', 'loginfrm');
     }
     $template->add(array(
-      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::parse(array(1=>"$1"))',
       '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
       '/{EMAIL}/' => Login::$text_username,
       '/{PASSWORD}/' => Login::$text_password,

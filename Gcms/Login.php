@@ -68,7 +68,7 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
   }
 
   /**
-   * ฟังก์ชั่นตรวจสอบการ login
+   * ฟังก์ชั่นตรวจสอบการ login และบันทึกการเข้าระบบ
    *
    * @param string $username
    * @param string $password
@@ -160,16 +160,18 @@ class Login extends \Kotchasan\Login implements \Kotchasan\LoginInterface
       }
     } else {
       self::$text_username = $username;
-      // ชื่อฟิลด์สำหรับตรวจสอบอีเมล์
+      // ชื่อฟิลด์สำหรับตรวจสอบอีเมล์ ใช้ฟิลด์แรกจาก config
       $field = reset(self::$cfg->login_fields);
-      // ค้นหาอีเมล์
-      $model = new Model;
+      // Model
+      $model = new \Kotchasan\Model;
+      // ตาราง user
       $table = $model->getTableName('user');
+      // ค้นหาอีเมล์
       $search = $model->db()->first($table, array(array($field, $username), array('fb', '0')));
       if ($search === false) {
         self::$login_message = Language::get('not a registered user');
       } else {
-        // รหัสผ่านใหม่
+        // สุ่มรหัสผ่านใหม่
         $password = \Kotchasan\Text::rndname(6);
         // ข้อมูลอีเมล์
         $replace = array(
