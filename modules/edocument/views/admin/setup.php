@@ -150,7 +150,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['topic'] = '<a href="'.WEB_URL.DATA_FOLDER.'edocument/'.$item['file'].'" target=_blank>'.$item['topic'].'.'.$item['ext'].'</a>';
     $item['size'] = Text::formatFileSize($item['size']);

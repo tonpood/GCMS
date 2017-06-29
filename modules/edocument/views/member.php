@@ -178,7 +178,7 @@ class View extends \Gcms\View
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['module_id'] = isset($this->modules[$item['module_id']]) ? $this->modules[$item['module_id']] : '';
     $item['topic'] = $item['topic'].'.'.$item['ext'];

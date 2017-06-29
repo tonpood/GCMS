@@ -131,7 +131,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $thumb = is_file(ROOT_PATH.DATA_FOLDER.'video/'.$item['youtube'].'.jpg') ? WEB_URL.DATA_FOLDER.'video/'.$item['youtube'].'.jpg' : '../modules/video/img/nopicture.jpg';
     $item['thumbnail'] = '<img src="'.$thumb.'" style="max-height:50px" alt=thumbnail>';

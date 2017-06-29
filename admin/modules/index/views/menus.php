@@ -140,7 +140,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $url = empty($item['menu_url']) ? WEB_URL.'index.php?module='.$item['module'] : $item['menu_url'];
     $text = '';

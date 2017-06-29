@@ -214,7 +214,7 @@ class View extends \Gcms\View
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['topic'] = '<a href="'.WEB_URL.'index.php?module='.$this->index->module.'&amp;id='.$item['id'].'" target=_blank>'.$item['topic'].'</a>';
     if (is_file(ROOT_PATH.DATA_FOLDER.'document/'.$item['picture'])) {

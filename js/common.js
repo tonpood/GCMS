@@ -1,5 +1,5 @@
 /**
- * Javascript Libraly for GCMS (front-end + back-end)
+ * Javascript Libraly for Ajax Front-end and Back-end
  *
  * @filesource js/common.js
  * @link http://www.kotchasan.com/

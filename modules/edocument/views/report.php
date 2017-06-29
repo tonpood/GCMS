@@ -114,7 +114,7 @@ class View extends \Gcms\View
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $name = trim($item['fname'].' '.$item['lname']);
     $item['fname'] = '<a href="'.WEB_URL.'index.php?module=member&amp;id='.$item['id'].'">'.( empty($name) ? $item['email'] : $name).'</a>';

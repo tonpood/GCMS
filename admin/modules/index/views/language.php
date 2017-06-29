@@ -125,7 +125,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     foreach ($this->languages as $lng) {
       if ($item['type'] == 'array') {

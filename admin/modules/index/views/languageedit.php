@@ -125,7 +125,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['key'] = Form::text(array(
         'name' => 'datas[key][]',
