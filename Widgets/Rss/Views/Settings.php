@@ -118,7 +118,7 @@ class Settings extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['url'] = '<a href="'.$item['url'].'" target=_blank>'.$item['url'].'</a>';
     $item['rows'] = $item['rows'].' * '.$item['cols'];

@@ -169,7 +169,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['id'] = '<em>{WIDGET_DOWNLOAD_'.$item['id'].'}</em>';
     $item['name'] = "<a href='".WEB_URL."$item[file]' target=_blank>$item[name].$item[ext]</a>";

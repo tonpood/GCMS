@@ -145,7 +145,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['published'] = '<a id=published_'.$item['id'].' class="icon-published'.$item['published'].'" title="'.$this->publisheds[$item['published']].'"></a>';
     $item['topic'] = '<span class=event_color style="background-color:'.$item['color'].'"></span><a href="../index.php?module='.$this->module.'&amp;id='.$item['id'].'" target=_blank>'.$item['topic'].'</a>';

@@ -144,7 +144,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['url'] = $item['url'] == '' ? '' : '<a href="'.$item['url'].'" target=_blank>'.$item['url'].'</a>';
     if (is_file(ROOT_PATH.DATA_FOLDER.'portfolio/thumb_'.$item['id'].'.jpg')) {

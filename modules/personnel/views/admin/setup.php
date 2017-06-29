@@ -156,7 +156,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['phone'] = "<a href='tel:$item[phone]'>$item[phone]</a>";
     $item['email'] = "<a href='".$this->uri->createBackUri(array('module' => 'sendmail', 'to' => $item['email']))."'>$item[email]</a>";

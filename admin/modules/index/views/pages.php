@@ -131,7 +131,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['topic'] = '<a href="../index.php?module=index&amp;id='.$item['id'].'" target="preview">'.$item['topic'].'</a>';
     $item['last_update'] = Date::format($item['last_update'], 'd M Y H:i');

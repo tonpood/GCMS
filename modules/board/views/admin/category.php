@@ -132,7 +132,7 @@ class View extends \Gcms\Adminview
    * @param array $item
    * @return array
    */
-  public function onRow($item)
+  public function onRow($item, $o, $prop)
   {
     $item['topic'] = $this->unserialize($item['topic']);
     $item['detail'] = $this->unserialize($item['detail']);
