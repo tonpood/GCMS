@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource document/models/view.php
+ * @filesource modules/document/models/view.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

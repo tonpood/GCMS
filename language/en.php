@@ -118,7 +118,7 @@ return array(
     0 => 'Unpublished',
     1 => 'Published'
   ),
-  'REGISTER_CONFIRM' => '<dt> Subscription Agreement</dt><dd>1. Membership to the site can participate fully</dd><dd>2. Membership requires a real e-mail contact. Due to be sent to the email confirmation that your registration. Or to request a new password</dd><dd>3. The site adheres Privacy Policy. Personal information will not be disclosed except the information required for identity verification is the case, the</dd><dd>4. When you read and accept this Agreement, please select <strong>accepted</strong> below</dd>',
+  'REGISTER_CONFIRM' => '<dt> Subscription Agreement</dt><dd>1. Membership to the site allows full participation.</dd><dd>2. Membership requires that you use a real email address, due to that an email confirmation is required in order to complete your registration and in order to request a new password.</dd><dd>3. The site adheres to a Privacy Policy. Personal information will not be disclosed except when as per required for identity verification purposes.</dd><dd>4. When you read and accept this Agreement, please select <strong>accepted</strong> below.</dd>',
   'REPLIES' => array(
     0 => 'Closing comments',
     1 => 'Can comments'

@@ -40,13 +40,12 @@ function initEditInplace(id, className) {
     }
   }
   var o = {
-    onSave: function (v) {
+    onSave: function (v, editor) {
       var req = new GAjax({
         asynchronous: false
       });
-      req.initLoading(this, false);
+      req.initLoading(editor, false);
       req.send('index.php/' + className, 'action=' + this.id + '&value=' + encodeURIComponent(v));
-      req.hideLoading();
       var ds = req.responseText.toJSON();
       if (ds) {
         if (ds.alert) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource index/controllers/menus.php
+ * @filesource modules/index/controllers/menus.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource portfolio/models/lists.php
+ * @filesource modules/portfolio/models/lists.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

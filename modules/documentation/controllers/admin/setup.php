@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource documentation/controllers/admin/setup.php
+ * @filesource modules/documentation/controllers/admin/setup.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

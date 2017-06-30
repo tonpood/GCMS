@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource index/controllers/amp.php
+ * @filesource modules/index/controllers/amp.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/

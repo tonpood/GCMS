@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource personnel/views/admin/category.php
+ * @filesource modules/personnel/views/admin/category.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -14,7 +14,7 @@ use \Kotchasan\Form;
 use \Gcms\Gcms;
 
 /**
- * module=document-category
+ * module=personnel-category
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

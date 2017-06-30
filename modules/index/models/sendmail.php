@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource index/models/sendmail.php
+ * @filesource modules/index/models/sendmail.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
