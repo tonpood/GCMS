@@ -82,6 +82,8 @@ function defaultSubmit(ds) {
     } else if (prop == 'url') {
       _url = val;
       _location = val;
+    } else if (prop == 'open') {
+      window.open(val);
     } else if (prop == 'tab') {
       initWriteTab("accordient_menu", val);
     } else if (remove.test(prop)) {
@@ -196,7 +198,7 @@ function initWriteTab(id, sel) {
   _doclick(sel);
 }
 function checkUsername() {
-  var patt = /[a-zA-Z0-9]+/;
+  var patt = /[a-zA-Z0-9@\.\-_]+/;
   var value = this.value;
   var ids = this.id.split('_');
   var id = '&id=' + floatval($E(ids[0] + '_id').value);

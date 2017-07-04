@@ -251,11 +251,25 @@ class DataTable extends \Kotchasan\KBase
    */
   private $javascript = array();
   /**
+   * เปิดใช้งาน Javascript ของตาราง
+   * true เปิดใช้งาน GTable
+   * false ปิดใช้งาน GTable แต่ยังแทรก Javascript อื่นๆได้
+   *
+   * @var boolean
+   */
+  public $enableJavascript = true;
+  /**
    * Uri ปัจจุบันของหน้าเว็บ
    *
    * @var Uri
    */
   private $uri;
+  /**
+   * ตัวเลือกจำนวนการแสดงผล
+   *
+   * @var array
+   */
+  public $entriesList = array(10, 20, 30, 40, 50, 100);
 
   /**
    * Initial Class
@@ -276,19 +290,24 @@ class DataTable extends \Kotchasan\KBase
     // รายการต่อหน้า มาจากการเลือกภายในตาราง
     if ($this->perPage > 0) {
       $count = self::$request->globals(array('POST', 'GET'), 'count')->toInt();
-      if ($count > 0) {
+      if (in_array($count, $this->entriesList)) {
         $this->perPage = $count;
         $this->uri = $this->uri->withParams(array('count' => $count));
       }
     }
     // header ของตาราง มาจาก model หรือมาจากข้อมูล หรือ มาจากการกำหนดเอง
     if (isset($this->model)) {
+      // แปลงฐานข้อมูลเป็น Model
+      $model = new \Kotchasan\Model;
+      $model = $model->db()->createQuery()->select();
       // อ่านข้อมูลรายการแรกเพื่อใช้ชื่อฟิลด์เป็นหัวตาราง
       if (is_string($this->model)) {
         // model เป็น Recordset, create Recordset
         $rs = new \Kotchasan\Orm\Recordset($this->model);
         // แปลง Recordset เป็น QueryBuilder
-        $this->model = $rs->toQueryBuilder();
+        $this->model = $model->from(array($rs->toQueryBuilder(), 'Z9'));
+      } else {
+        $this->model = $model->from(array($this->model, 'Z9'));
       }
       // อ่านข้อมูลรายการแรก
       $first = $this->model->copy()->first($this->fields);
@@ -384,11 +403,15 @@ class DataTable extends \Kotchasan\KBase
     $form = array();
     if ($this->perPage > 0) {
       $entries = Language::get('entries');
+      $options = array();
+      foreach ($this->entriesList as $c) {
+        $options[$c] = $c.' '.$entries;
+      }
       $form[] = $this->addFilter(array(
         'name' => 'count',
         'text' => Language::get('Show'),
         'value' => $this->perPage,
-        'options' => array(10 => '10 '.$entries, 20 => '20 '.$entries, 30 => '30 '.$entries, 40 => '40 '.$entries, 50 => '50 '.$entries, 100 => '100 '.$entries)
+        'options' => $options
       ));
     }
     // รายการ Query กำหนดโดย User (AND)
@@ -653,21 +676,25 @@ class DataTable extends \Kotchasan\KBase
       }
     }
     $content[] = '</div>';
-    $script = array(
-      'page' => $page,
-      'search' => $search,
-      'sort' => $this->sort,
-      'action' => $this->action,
-      'actionCallback' => $this->actionCallback,
-      'actionConfirm' => $this->actionConfirm,
-      'onBeforeDelete' => $this->onBeforeDelete,
-      'onInitRow' => $this->onInitRow,
-      'onAddRow' => $this->onAddRow,
-      'pmButton' => $this->pmButton,
-      'dragColumn' => $this->dragColumn
-    );
-    $this->javascript[] = 'var table = new GTable("'.$this->id.'", '.json_encode($script).');';
-    $content[] = "<script>\n".implode("\n", $this->javascript)."\n</script>";
+    if ($this->enableJavascript) {
+      $script = array(
+        'page' => $page,
+        'search' => $search,
+        'sort' => $this->sort,
+        'action' => $this->action,
+        'actionCallback' => $this->actionCallback,
+        'actionConfirm' => $this->actionConfirm,
+        'onBeforeDelete' => $this->onBeforeDelete,
+        'onInitRow' => $this->onInitRow,
+        'onAddRow' => $this->onAddRow,
+        'pmButton' => $this->pmButton,
+        'dragColumn' => $this->dragColumn
+      );
+      $this->javascript[] = 'var table = new GTable("'.$this->id.'", '.json_encode($script).');';
+    }
+    if (!empty($this->javascript)) {
+      $content[] = "<script>\n".implode("\n", $this->javascript)."\n</script>";
+    }
     return implode("\n", $content);
   }
 
