@@ -47,7 +47,7 @@ class View extends \Gcms\Adminview
       'perPage' => self::$request->cookie('album_perPage', 30)->toInt(),
       /* query where */
       'defaultFilters' => array(
-        array('A.module_id', (int)$index->module_id)
+        array('module_id', (int)$index->module_id)
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),

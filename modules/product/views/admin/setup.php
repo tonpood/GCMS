@@ -47,12 +47,12 @@ class View extends \Gcms\Adminview
       'perPage' => self::$request->cookie('product_perPage', 30)->toInt(),
       /* query where */
       'defaultFilters' => array(
-        array('P.module_id', (int)$index->module_id)
+        array('module_id', (int)$index->module_id)
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('id'),
+      'hideColumns' => array('id', 'module_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/product/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

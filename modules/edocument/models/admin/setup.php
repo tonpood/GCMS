@@ -29,6 +29,30 @@ class Model extends \Kotchasan\Orm\Field
   protected $table = 'edocument A';
 
   /**
+   * query หน้าเพจ เรียงลำดับตาม module,language
+   *
+   * @return array
+   */
+  public function getConfig()
+  {
+    return array(
+      'select' => array(
+        'A.id',
+        'A.document_no',
+        'A.topic',
+        'A.ext',
+        'A.detail',
+        array($this->db()->createQuery()->select('email')->from('user U')->where(array('U.id', 'A.sender_id')), 'sender'),
+        'A.size',
+        'A.last_update',
+        'A.downloads',
+        'A.file',
+        'A.module_id',
+      ),
+    );
+  }
+
+  /**
    * รับค่าจาก action ของ table
    */
   public static function action()

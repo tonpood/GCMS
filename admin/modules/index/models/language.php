@@ -94,4 +94,112 @@ class Model extends \Kotchasan\Orm\Field
     }
     return $error;
   }
+
+  /**
+   * นำเข้าข้อมูลไฟล์ภาษา
+   */
+  public static function import()
+  {
+    $dir = ROOT_PATH.'language/';
+    if (is_dir($dir)) {
+      // Model
+      $model = new \Kotchasan\Model;
+      // ตาราง language
+      $language_table = $model->getTableName('language');
+      $f = opendir($dir);
+      while (false !== ($text = readdir($f))) {
+        if (preg_match('/([a-z]{2,2})\.(php|js)/', $text, $match)) {
+          if ($model->db()->fieldExists($language_table, $match[1]) == false) {
+            // เพิ่อมคอลัมน์ภาษา ถ้ายังไม่มีภาษาที่ต้องการ
+            $model->db()->query("ALTER TABLE `$language_table` ADD `$match[1]` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci AFTER `key`");
+          }
+          if ($match[2] == 'php') {
+            self::importPHP($model->db(), $language_table, $match[1], $dir.$text);
+          } else {
+            self::importJS($model->db(), $language_table, $match[1], $dir.$text);
+          }
+        }
+      }
+      closedir($f);
+    }
+  }
+
+  /**
+   * นำเข้าข้อมูลไฟล์ภาษา PHP
+   *
+   * @param Database $db Database Object
+   * @param string $language_table ชื่อตาราง language
+   * @param string $lang ชื่อภาษา
+   * @param string $file_name ไฟล์ภาษา
+   */
+  public static function importPHP($db, $language_table, $lang, $file_name)
+  {
+    foreach (include ($file_name) AS $key => $value) {
+      if (is_array($value)) {
+        $type = 'array';
+      } else if (is_int($value)) {
+        $type = 'int';
+      } else {
+        $type = 'text';
+      }
+      $search = $db->first($language_table, array(
+        array('key', $key),
+        array('js', 0),
+        array('type', $type)
+      ));
+      if ($type == 'array') {
+        $value = serialize($value);
+      }
+      if ($search) {
+        $db->update($language_table, $search->id, array(
+          $lang => $value,
+        ));
+      } else {
+        $db->insert($language_table, array(
+          'key' => $key,
+          'js' => 0,
+          'type' => $type,
+          'owner' => 'index',
+          $lang => $value,
+        ));
+      }
+    }
+  }
+
+  /**
+   * นำเข้าข้อมูลไฟล์ภาษา Javascript
+   *
+   * @param Database $db Database Object
+   * @param string $language_table ชื่อตาราง language
+   * @param string $lang ชื่อภาษา
+   * @param string $file_name ไฟล์ภาษา
+   */
+  public static function importJS($db, $language_table, $lang, $file_name)
+  {
+    $patt = '/^var[\s]+([A-Z0-9_]+)[\s]{0,}=[\s]{0,}[\'"](.*)[\'"];$/';
+    foreach (file($file_name) AS $item) {
+      $item = trim($item);
+      if ($item != '') {
+        if (preg_match($patt, $item, $match)) {
+          $search = $db->first($language_table, array(
+            array('key', $match[1]),
+            array('js', 1)
+          ));
+          if ($search) {
+            $db->update($language_table, $search->id, array(
+              $lang => $match[2],
+            ));
+          } else {
+            $db->insert($language_table, array(
+              'key' => $match[1],
+              'js' => 1,
+              'type' => 'text',
+              'owner' => 'index',
+              $lang => $match[2],
+            ));
+          }
+        }
+      }
+    }
+  }
 }

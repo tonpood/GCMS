@@ -59,10 +59,10 @@ class View extends \Gcms\View
           'model' => 'Document\Admin\Setup\Model',
           /* query where */
           'defaultFilters' => array(
-            array('P.module_id', (int)$this->index->module_id),
-            array('P.member_id', (int)$login['id']),
-            array('P.index', 0),
-            array('D.language', array(Language::name(), ''))
+            array('module_id', (int)$this->index->module_id),
+            array('member_id', (int)$login['id']),
+            array('index', 0),
+            array('language', array(Language::name(), ''))
           ),
           /* เรียงลำดับ */
           'sort' => 'P.id desc',

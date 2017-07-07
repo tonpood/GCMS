@@ -51,7 +51,9 @@ class Model extends \Kotchasan\Orm\Field
         'P.member_id',
         'P.visited',
         'U.status',
-        'P.module_id'
+        'P.module_id',
+        'P.index',
+        'D.language'
       ),
       'join' => array(
         array(

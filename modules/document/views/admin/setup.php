@@ -57,14 +57,14 @@ class View extends \Gcms\Adminview
       'perPage' => self::$request->cookie('document_perPage', 30)->toInt(),
       /* query where */
       'defaultFilters' => array(
-        array('P.module_id', (int)$index->module_id),
-        array('P.index', 0),
-        array('D.language', array(Language::name(), ''))
+        array('module_id', (int)$index->module_id),
+        array('index', 0),
+        array('language', array(Language::name(), ''))
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('member_id', 'id', 'status', 'module_id'),
+      'hideColumns' => array('member_id', 'id', 'status', 'module_id', 'index', 'language'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/document/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

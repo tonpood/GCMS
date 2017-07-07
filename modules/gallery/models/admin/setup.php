@@ -36,8 +36,7 @@ class Model extends \Kotchasan\Orm\Field
    */
   public function getConfig()
   {
-    $model = new \Kotchasan\Model;
-    $query = $model->db()->createQuery()
+    $query = $this->db()->createQuery()
       ->select('G.image')
       ->from('gallery G')
       ->where(array(array('G.album_id', 'A.id'), array('G.module_id', 'A.module_id')))
@@ -50,7 +49,8 @@ class Model extends \Kotchasan\Orm\Field
         array($query, 'image'),
         'A.count',
         'A.visited',
-        'A.last_update'
+        'A.last_update',
+        'A.module_id'
       )
     );
   }

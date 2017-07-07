@@ -41,12 +41,12 @@ class View extends \Gcms\Adminview
       /* Model */
       'model' => 'Index\Mods\Model',
       'defaultFilters' => array(
-        array('I.index', 1)
+        array('index', 1)
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('module_id', 'id'),
+      'hideColumns' => array('module_id', 'id', 'index'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/index/model/mods/action',
       'actionCallback' => 'indexActionCallback',

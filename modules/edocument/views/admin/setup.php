@@ -34,9 +34,9 @@ class View extends \Gcms\Adminview
   {
     // Uri
     $uri = self::$request->getUri();
-    $where = array(array('A.module_id', (int)$index->module_id));
+    $where = array(array('module_id', (int)$index->module_id));
     if (!Gcms::canConfig($login, $index, 'moderator')) {
-      $where[] = array('A.sender_id', (int)$login['id']);
+      $where[] = array('sender_id', (int)$login['id']);
     }
     // model
     $model = new \Kotchasan\Model;
@@ -46,25 +46,12 @@ class View extends \Gcms\Adminview
       'model' => 'Edocument\Admin\Setup\Model',
       /* รายการต่อหน้า */
       'perPage' => self::$request->cookie('edocument_perPage', 30)->toInt(),
-      /* ฟิลด์ที่กำหนด (หากแตกต่างจาก Model) */
-      'fields' => array(
-        'id',
-        'document_no',
-        'topic',
-        'ext',
-        'detail',
-        array($model->db()->createQuery()->select('email')->from('user U')->where(array('U.id', 'A.sender_id')), 'sender'),
-        'size',
-        'last_update',
-        'downloads',
-        'file'
-      ),
       /* query where */
       'defaultFilters' => $where,
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('id', 'ext', 'file'),
+      'hideColumns' => array('id', 'ext', 'file', 'module_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/edocument/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

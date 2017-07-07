@@ -44,7 +44,7 @@ class View extends \Gcms\Adminview
       'perPage' => self::$request->cookie('pages_perPage', 30)->toInt(),
       /* query where */
       'defaultFilters' => array(
-        array('M.owner', 'index')
+        array('owner', 'index')
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),

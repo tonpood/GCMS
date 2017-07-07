@@ -41,9 +41,9 @@ class View extends \Gcms\Adminview
     $this->categories = \Index\Category\Model::categories((int)$index->module_id);
     // Uri
     $uri = self::$request->getUri();
-    $where = array(array('A.module_id', (int)$index->module_id));
+    $where = array(array('module_id', (int)$index->module_id));
     if (!Gcms::canConfig($login, $index, 'moderator')) {
-      $where[] = array('A.member_id', (int)$login['id']);
+      $where[] = array('member_id', (int)$login['id']);
     }
     // ตาราง
     $table = new DataTable(array(
@@ -61,14 +61,16 @@ class View extends \Gcms\Adminview
         'size',
         'last_update',
         'downloads',
-        'file'
+        'file',
+        'module_id',
+        'member_id'
       ),
       /* query where */
       'defaultFilters' => $where,
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('ext', 'file'),
+      'hideColumns' => array('ext', 'file', 'module_id', 'member_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/download/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

@@ -50,7 +50,7 @@ class View extends \Gcms\Adminview
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('id', 'index_id', 'level', 'menu_url', 'ilanguage'),
+      'hideColumns' => array('id', 'index_id', 'level', 'menu_url', 'ilanguage', 'parent'),
       /* enable drag row */
       'dragColumn' => 4,
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */

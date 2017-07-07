@@ -47,25 +47,14 @@ class View extends \Gcms\Adminview
       'model' => 'Event\Admin\Setup\Model',
       /* รายการต่อหน้า */
       'perPage' => self::$request->cookie('event_perPage', 30)->toInt(),
-      /* ฟิลด์ที่กำหนด (หากแตกต่างจาก Model) */
-      'fields' => array(
-        'id',
-        'topic',
-        'color',
-        'begin_date',
-        'end_date',
-        'last_update',
-        'published',
-        array($model->db()->createQuery()->select('email')->from('user U')->where(array('U.id', 'A.member_id')), 'writer')
-      ),
       /* query where */
       'defaultFilters' => array(
-        array('A.module_id', (int)$index->module_id)
+        array('module_id', (int)$index->module_id)
       ),
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('id', 'end_date', 'color'),
+      'hideColumns' => array('id', 'end_date', 'color', 'module_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/event/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

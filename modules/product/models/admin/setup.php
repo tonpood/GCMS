@@ -42,7 +42,8 @@ class Model extends \Kotchasan\Orm\Field
         'D.topic',
         'P.published',
         'P.last_update',
-        'P.visited'
+        'P.visited',
+        'P.module_id'
       ),
       'join' => array(
         array(

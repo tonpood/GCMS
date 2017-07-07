@@ -11,6 +11,7 @@ namespace Event\Admin\Setup;
 use \Kotchasan\Login;
 use \Kotchasan\Language;
 use \Gcms\Gcms;
+use \Kotchasan\Database\Sql;
 
 /**
  * โมเดลสำหรับแสดงรายการบทความ (setup.php)
@@ -27,6 +28,28 @@ class Model extends \Kotchasan\Orm\Field
    * @var string
    */
   protected $table = 'event A';
+
+  /**
+   * query หน้าเพจ เรียงลำดับตาม module,language
+   *
+   * @return array
+   */
+  public function getConfig()
+  {
+    return array(
+      'select' => array(
+        'A.id',
+        'A.topic',
+        'A.color',
+        'A.begin_date',
+        'A.end_date',
+        'A.last_update',
+        'A.published',
+        array($this->db()->createQuery()->select('email')->from('user U')->where(array('U.id', 'A.member_id')), 'writer'),
+        'A.module_id'
+      )
+    );
+  }
 
   /**
    * รับค่าจาก action ของ table

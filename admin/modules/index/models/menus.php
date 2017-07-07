@@ -49,7 +49,8 @@ class Model extends \Kotchasan\Orm\Field
         'U.menu_url',
         'U.id',
         'M.module',
-        'I.language ilanguage'
+        'I.language ilanguage',
+        'U.parent'
       ),
       'join' => array(
         array(

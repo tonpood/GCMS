@@ -44,7 +44,8 @@ class Model extends \Kotchasan\Orm\Field
         'M.module',
         'M.owner',
         'I.last_update',
-        'I.visited'
+        'I.visited',
+        'I.index'
       ),
       'join' => array(
         array(
