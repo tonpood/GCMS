@@ -50,17 +50,19 @@ class View extends \Kotchasan\KBase
     }
     // โหลด css ของ Widgets
     $dir = ROOT_PATH.'Widgets/';
-    $f = opendir($dir);
-    while (false !== ($text = readdir($f))) {
-      if ($text != "." && $text != "..") {
-        if (is_dir($dir.$text)) {
-          if (is_file($dir.$text.'/style.css')) {
-            $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'Widgets/'.$text.'/img/', file_get_contents($dir.$text.'/style.css'));
+    $f = @opendir($dir);
+    if ($f) {
+      while (false !== ($text = readdir($f))) {
+        if ($text != "." && $text != "..") {
+          if (is_dir($dir.$text)) {
+            if (is_file($dir.$text.'/style.css')) {
+              $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'Widgets/'.$text.'/img/', file_get_contents($dir.$text.'/style.css'));
+            }
           }
         }
       }
+      closedir($f);
     }
-    closedir($f);
     // status color
     foreach (self::$cfg->color_status as $key => $value) {
       $data2 .= '.status'.$key.'{color:'.$value.'}';

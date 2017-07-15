@@ -29,6 +29,7 @@ class View extends \Gcms\Adminview
   /**
    * ตารางภาษา
    *
+   * @param Request $request
    * @return string
    */
   public function render(Request $request)
@@ -45,15 +46,45 @@ class View extends \Gcms\Adminview
       'uri' => $uri,
       /* Model */
       'model' => 'Index\Language\Model',
-      /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
-      'onRow' => array($this, 'onRow'),
-      /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('type', 'js'),
       /* แบ่งหน้า */
       'perPage' => max(10, $request->cookie('language_perPage', 30)->toInt()),
       /* เรียงลำดับ */
       'sort' => $request->cookie('language_sort', 'id DESC')->toString(),
+      /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
+      'onRow' => array($this, 'onRow'),
+      /* คอลัมน์ที่ไม่ต้องแสดงผล */
+      'hideColumns' => array('type', 'js'),
+      /* คอลัมน์ที่สามารถค้นหาได้ */
       'searchColumns' => array_merge(array('key'), $this->languages),
+      /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
+      'action' => 'index.php/index/model/language/action?js='.$js,
+      'actionCallback' => 'doFormSubmit',
+      'actionConfirm' => 'confirmAction',
+      'actions' => array(
+        array(
+          'id' => 'action',
+          'class' => 'ok',
+          'text' => '{LNG_With selected}',
+          'options' => array(
+            'delete' => '{LNG_Delete}'
+          )
+        ),
+        array(
+          'class' => 'button add icon-plus',
+          'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => null, 'js' => $js)),
+          'text' => '{LNG_Add New}'
+        )
+      ),
+      /* ตัวเลือกด้านบนของตาราง ใช้จำกัดผลลัพท์การ query */
+      'filters' => array(
+        'js' => array(
+          'name' => 'js',
+          'text' => '{LNG_Type}',
+          'options' => array(0 => 'php', 1 => 'js'),
+          'value' => $js
+        )
+      ),
+      /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
         'id' => array(
           'text' => '{LNG_ID}',
@@ -75,37 +106,12 @@ class View extends \Gcms\Adminview
           'class' => 'center'
         ),
       ),
-      'action' => 'index.php/index/model/language/action?js='.$js,
-      'actionCallback' => 'doFormSubmit',
-      'actionConfirm' => 'confirmAction',
-      'actions' => array(
-        array(
-          'id' => 'action',
-          'class' => 'ok',
-          'text' => '{LNG_With selected}',
-          'options' => array(
-            'delete' => '{LNG_Delete}'
-          )
-        ),
-        array(
-          'class' => 'button add icon-plus',
-          'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => null, 'js' => $js)),
-          'text' => '{LNG_Add New}'
-        )
-      ),
+      /* ปุ่มแสดงในแต่ละแถว */
       'buttons' => array(
         array(
           'class' => 'icon-edit button green',
           'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => ':id', 'js' => $js)),
           'text' => '{LNG_Edit}'
-        )
-      ),
-      'filters' => array(
-        'js' => array(
-          'name' => 'js',
-          'text' => '{LNG_Type}',
-          'options' => array(0 => 'php', 1 => 'js'),
-          'value' => $js
         )
       )
     ));
@@ -115,7 +121,9 @@ class View extends \Gcms\Adminview
     // save cookie
     setcookie('language_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
     setcookie('language_sort', $table->sort, time() + 3600 * 24 * 365, '/');
+    // Javascript
     $table->script('initLanguageTable("language_table");');
+    // คืนค่า HTML
     return $table->render();
   }
 
@@ -142,6 +150,12 @@ class View extends \Gcms\Adminview
     return $item;
   }
 
+  /**
+   * แปลงข้อความ สำหรับแสดงตัวอย่าง
+   *
+   * @param string $text
+   * @return string
+   */
   private static function toText($text)
   {
     return Text::cut(str_replace(array("\r", "\n", '&'), array('', ' ', '&amp;'), strip_tags($text)), 50);

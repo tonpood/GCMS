@@ -31,12 +31,12 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Setting up the email system}';
+    // เลือกเมนู
+    $this->menu = 'settings';
     // แอดมิน
     if (Login::isAdmin()) {
-      // ข้อความ title bar
-      $this->title = '{LNG_Setting up the email system}';
-      // เลือกเมนู
-      $this->menu = 'settings';
       // แสดงผล
       $section = Html::create('section');
       // breadcrumbs

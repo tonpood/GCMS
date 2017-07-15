@@ -30,12 +30,12 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Member List}';
+    // เลือกเมนู
+    $this->menu = 'users';
     // แอดมิน
     if (Login::isAdmin()) {
-      // ข้อความ title bar
-      $this->title = '{LNG_Member List}';
-      // เลือกเมนู
-      $this->menu = 'users';
       // แสดงผล
       $section = Html::create('section');
       // breadcrumbs

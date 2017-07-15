@@ -8,10 +8,11 @@
 
 namespace Index\Mailserver;
 
+use \Kotchasan\Http\Request;
 use \Kotchasan\Login;
 use \Kotchasan\Language;
-use \Kotchasan\Validator;
 use \Kotchasan\Config;
+use \Kotchasan\Validator;
 
 /**
  * บันทึกการตั้งค่าระบบอีเมล์
@@ -25,32 +26,32 @@ class Model extends \Kotchasan\KBase
 
   /**
    * form submit
+   *
+   * @param Request $request
    */
-  public function save()
+  public function submit(Request $request)
   {
     $ret = array();
-    // referer, session, member
-    if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo' || !empty($login['fb'])) {
-        $ret['alert'] = Language::get('Unable to complete the transaction');
-      } else {
+    // session, token, admin
+    if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
+      if ($login['email'] != 'demo') {
         // โหลด config
         $config = Config::load(ROOT_PATH.'settings/config.php');
         // รับค่าจากการ POST
         $save = array(
-          'noreply_email' => self::$request->post('noreply_email')->url(),
-          'email_charset' => self::$request->post('email_charset')->text(),
-          'email_use_phpMailer' => self::$request->post('email_use_phpMailer')->toBoolean(),
-          'email_Host' => self::$request->post('email_Host')->text(),
-          'email_Port' => self::$request->post('email_Port')->toInt(),
-          'email_SMTPAuth' => self::$request->post('email_SMTPAuth')->toBoolean(),
-          'email_SMTPSecure' => self::$request->post('email_SMTPSecure')->text(),
-          'email_Username' => self::$request->post('email_Username')->quote(),
-          'email_Password' => self::$request->post('email_Password')->quote()
+          'noreply_email' => $request->post('noreply_email')->url(),
+          'email_charset' => $request->post('email_charset')->text(),
+          'email_use_phpMailer' => $request->post('email_use_phpMailer')->toBoolean(),
+          'email_Host' => $request->post('email_Host')->text(),
+          'email_Port' => $request->post('email_Port')->toInt(),
+          'email_SMTPAuth' => $request->post('email_SMTPAuth')->toBoolean(),
+          'email_SMTPSecure' => $request->post('email_SMTPSecure')->text(),
+          'email_Username' => $request->post('email_Username')->quote(),
+          'email_Password' => $request->post('email_Password')->quote()
         );
         // อีเมล์
         if (empty($save['noreply_email'])) {
-          $ret['ret_noreply_email'] = Language::get('Please fill in').' '.Language::get('Email');
+          $ret['ret_noreply_email'] = 'Please fill in';
         } elseif (!Validator::email($save['noreply_email'])) {
           $ret['ret_noreply_email'] = str_replace(':name', Language::get('Email'), Language::get('Invalid :name'));
         } else {
@@ -79,12 +80,16 @@ class Model extends \Kotchasan\KBase
           if (Config::save($config, ROOT_PATH.'settings/config.php')) {
             $ret['alert'] = Language::get('Saved successfully');
             $ret['location'] = 'reload';
+            // เคลียร์
+            $request->removeToken();
           } else {
+            // ไม่สามารถบันทึก config ได้
             $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
           }
         }
       }
-    } else {
+    }
+    if (empty($ret)) {
       $ret['alert'] = Language::get('Unable to complete the transaction');
     }
     // คืนค่าเป็น JSON

@@ -83,7 +83,13 @@ function defaultSubmit(ds) {
       _url = val;
       _location = val;
     } else if (prop == 'open') {
-      window.open(val);
+      var a = document.createElement('a');
+      a.href = val;
+      a.target = '_blank';
+      a.style.position = 'absolute';
+      a.style.left = -100000;
+      document.body.appendChild(a);
+      a.click();
     } else if (prop == 'tab') {
       initWriteTab("accordient_menu", val);
     } else if (remove.test(prop)) {
@@ -176,10 +182,9 @@ function doFormSubmit(xhr) {
   }
 }
 function initWriteTab(id, sel) {
-  var a;
   function _doclick(sel) {
     forEach($E(id).getElementsByTagName('a'), function () {
-      a = this.id.replace('tab_', '');
+      var a = this.id.replace('tab_', '');
       if ($E(a)) {
         this.className = a == sel ? 'select' : '';
         $E(a).style.display = a == sel ? 'block' : 'none';
@@ -187,7 +192,7 @@ function initWriteTab(id, sel) {
     });
     $E('tab').value = sel;
   }
-  forEach($E(id).getElementsByTagName('a'), function () {
+  forEach($G(id).elems('a'), function () {
     if ($E(this.id.replace('tab_', ''))) {
       callClick(this, function () {
         _doclick(this.id.replace('tab_', ''));

@@ -30,17 +30,18 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Add and manage the display language of the site}';
+    // เลือกเมนู
+    $this->menu = 'tools';
     // แอดมิน
     if (Login::isAdmin()) {
-      // ข้อความ title bar
-      $this->title = '{LNG_Add and manage the display language of the site}';
-      // เลือกเมนู
-      $this->menu = 'tools';
       // ภาษาที่ติดตั้ง
       $languages = \Gcms\Gcms::installedLanguage();
       // รายการที่แก้ไข (id)
       $id = $request->get('id')->toInt();
       if ($id > 0) {
+        $title = '{LNG_Edit}';
         // แก้ไข อ่านรายการที่เลือก
         $model = new \Kotchasan\Model();
         $language = $model->db()->first($model->getTableName('language'), $id);
@@ -53,9 +54,20 @@ class Controller extends \Gcms\Controller
                   $language->datas[$key]['key'] = $key;
                   $language->datas[$key][$lng] = $value;
                 }
+              } else {
+                $language->datas[0]['key'] = '';
+                $language->datas[0][$lng] = $language->$lng;
               }
             }
             unset($language->$lng);
+          }
+          // ตรวจสอบข้อมูลให้มีทุกภาษา
+          foreach ($language->datas as $key => $values) {
+            foreach ($languages as $lng) {
+              if (!isset($language->datas[$key][$lng])) {
+                $language->datas[$key][$lng] = '';
+              }
+            }
           }
         } else {
           $language->datas[0]['key'] = '';
@@ -65,6 +77,7 @@ class Controller extends \Gcms\Controller
           }
         }
       } else {
+        $title = '{LNG_Add New}';
         // ใหม่
         $language = array(
           'id' => 0,
@@ -87,8 +100,8 @@ class Controller extends \Gcms\Controller
       ));
       $ul = $breadcrumbs->add('ul');
       $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
-      $ul->appendChild('<li><a href="{BACKURL?module=language}">{LNG_Language}</a></li>');
-      $ul->appendChild('<li><span>{LNG_'.($id > 0 ? 'Edit' : 'Create').'}</span></li>');
+      $ul->appendChild('<li><a href="{BACKURL?module=language&id=0}">{LNG_Language}</a></li>');
+      $ul->appendChild('<li><span>'.$title.'</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-language">'.$this->title.'</h1>'
       ));

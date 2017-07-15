@@ -78,10 +78,10 @@ class Model extends \Kotchasan\Orm\Field
    */
   public function action(Request $request)
   {
+    $ret = array();
+    // session, referer, admin
     if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo' || !empty($login['fb'])) {
-        echo Language::get('Unable to complete the transaction');
-      } else {
+      if ($login['email'] != 'demo') {
         // รับค่าจากการ POST
         $action = $request->post('action')->toString();
         // id ที่ส่งมา

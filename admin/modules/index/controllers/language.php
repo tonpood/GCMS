@@ -30,12 +30,12 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Add and manage the display language of the site}';
+    // เลือกเมนู
+    $this->menu = 'tools';
     // แอดมิน
     if (Login::isAdmin()) {
-      // ข้อความ title bar
-      $this->title = '{LNG_Add and manage the display language of the site}';
-      // เลือกเมนู
-      $this->menu = 'tools';
       // แสดงผล
       $section = Html::create('section');
       // breadcrumbs

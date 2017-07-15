@@ -12,7 +12,7 @@ use \Kotchasan\Http\Request;
 use \Kotchasan\Template;
 
 /**
- * Controller หลัก สำหรับแสดง backend ของ GCMS
+ * Controller หลัก สำหรับแสดงหน้าเว็บไซต์
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *

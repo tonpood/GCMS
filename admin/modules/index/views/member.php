@@ -45,7 +45,7 @@ class View extends \Gcms\Adminview
     $table = new DataTable(array(
       /* Model */
       'model' => 'Index\Member\Model',
-      /* แบ่งหน้า */
+      /* รายการต่อหน้า */
       'perPage' => $request->cookie('member_perPage', 30)->toInt(),
       /* เรียงลำดับ */
       'sort' => $request->cookie('member_sort', 'id desc')->toString(),
@@ -181,6 +181,7 @@ class View extends \Gcms\Adminview
     // save cookie
     setcookie('member_perPage', $table->perPage, time() + 3600 * 24 * 365, '/');
     setcookie('member_sort', $table->sort, time() + 3600 * 24 * 365, '/');
+    // คืนค่า HTML
     return $table->render();
   }
 

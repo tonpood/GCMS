@@ -36,12 +36,12 @@ class Controller extends \Gcms\Controller
    */
   public function render(Request $request)
   {
+    // ข้อความ title bar
+    $this->title = '{LNG_Editing your account}';
+    // เลือกเมนู
+    $this->menu = 'users';
     // สมาชิก
     if ($login = Login::isMember()) {
-      // ข้อความ title bar
-      $this->title = '{LNG_Editing your account}';
-      // เลือกเมนู
-      $this->menu = 'users';
       // id ที่ต้องการ ถ้าไม่มีใช้คนที่ login
       $id = $request->get('id', $login['id'])->toInt();
       // อ่านข้อมูลสมาชิก

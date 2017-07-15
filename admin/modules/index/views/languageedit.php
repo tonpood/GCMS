@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource modules/index/controllers/languageedit.php
+ * @filesource modules/index/views/languageedit.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -35,8 +35,9 @@ class View extends \Gcms\Adminview
     $form = Html::create('form', array(
         'id' => 'setup_frm',
         'class' => 'setup_frm',
-        'onsubmit' => 'doFormSubmit',
+        'autocomplete' => 'off',
         'action' => 'index.php/index/model/languageedit/submit',
+        'onsubmit' => 'doFormSubmit',
         'ajax' => true,
         'token' => true
     ));

@@ -30,9 +30,7 @@ class Model extends \Kotchasan\KBase
     $ret = array();
     // session, referer, admin
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo' || !empty($login['fb'])) {
-        $ret['alert'] = Language::get('Unable to complete the transaction');
-      } else {
+      if ($login['email'] != 'demo') {
         // โหลด config
         $config = Config::load(ROOT_PATH.'settings/config.php');
         // รับค่าจากการ POST
@@ -112,7 +110,8 @@ class Model extends \Kotchasan\KBase
           $ret['alert'] = sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php');
         }
       }
-    } else {
+    }
+    if (empty($ret)) {
       $ret['alert'] = Language::get('Unable to complete the transaction');
     }
     // คืนค่าเป็น JSON

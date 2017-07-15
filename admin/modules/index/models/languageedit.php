@@ -61,11 +61,9 @@ class Model extends \Kotchasan\Model
   public function submit(Request $request)
   {
     $ret = array();
-    // session, token, member
+    // session, token, admin
     if ($request->initSession() && $request->isSafe() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo' || !empty($login['fb'])) {
-        $ret['alert'] = Language::get('Unable to complete the transaction');
-      } else {
+      if ($login['email'] != 'demo') {
         // ค่าที่ส่งมา
         $save = array(
           'js' => $request->post('write_js')->toBoolean(),
@@ -74,29 +72,25 @@ class Model extends \Kotchasan\Model
           'key' => $this->allowTags($request->post('write_key')->topic())
         );
         // ภาษาที่ติดตั้ง
-        $languages = \Gcms\Gcms::installedLanguage();
-        $array = false;
+        $languages = Language::installedLanguage();
         foreach ($request->post('datas')->topic() as $items) {
           foreach ($languages as $lng) {
             if ($items[$lng] != '') {
               $save[$lng][$items['key']] = $items[$lng];
               if (sizeof($save[$lng]) > 1) {
-                $array = true;
+                $save['type'] = 'array';
               }
             }
           }
         }
         foreach ($languages as $lng) {
-          if ($array) {
+          if ($save['type'] == 'array') {
             $save[$lng] = $this->allowTags(serialize($save[$lng]));
           } elseif (isset($save[$lng])) {
             $save[$lng] = $this->allowTags(reset($save[$lng]));
           } else {
             $save[$lng] = '';
           }
-        }
-        if ($array) {
-          $save['type'] = 'array';
         }
         if ($save['js']) {
           if (isset($save['en']) && $save['en'] == '') {
@@ -152,7 +146,10 @@ class Model extends \Kotchasan\Model
         }
       }
     }
-    // คืนค่า json
+    if (empty($ret)) {
+      $ret['alert'] = Language::get('Unable to complete the transaction');
+    }
+    // คืนค่าเป็น JSON
     echo json_encode($ret);
   }
 }

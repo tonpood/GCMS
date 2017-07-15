@@ -8,11 +8,12 @@
 
 namespace Index\Language;
 
+use \Kotchasan\Http\Request;
 use \Kotchasan\Login;
 use \Kotchasan\Language;
 
 /**
- * บันทึกรายการภาษา
+ * โมเดลสำหรับภาษา (language.php)
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -29,16 +30,18 @@ class Model extends \Kotchasan\Orm\Field
 
   /**
    * รับค่าจาก action
+   *
+   * @param Request $request
    */
-  public function action()
+  public function action(Request $request)
   {
     $ret = array();
     // session, referer, admin
-    if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
-      if (empty($login['fb'])) {
+    if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
+      if ($login['email'] != 'demo') {
         // ค่าที่ส่งมา
-        $id = self::$request->post('id')->filter('0-9,');
-        $action = self::$request->post('action')->toString();
+        $id = $request->post('id')->filter('0-9,');
+        $action = $request->post('action')->toString();
         if ($action == 'delete') {
           $model = new \Kotchasan\Model;
           $model->db()->delete($model->getTableName('language'), array('id', explode(',', $id)), 0);
@@ -51,9 +54,11 @@ class Model extends \Kotchasan\Orm\Field
           }
         }
       }
-    } else {
+    }
+    if (empty($ret)) {
       $ret['alert'] = Language::get('Unable to complete the transaction');
     }
+    // คืนค่า JSON
     echo json_encode($ret);
   }
 
@@ -63,10 +68,10 @@ class Model extends \Kotchasan\Orm\Field
   public static function updateLanguageFile()
   {
     // ภาษาที่ติดตั้ง
-    $languages = \Gcms\Gcms::installedLanguage();
+    $languages = Language::installedLanguage();
     // query ข้อมูลภาษา
     $model = new \Kotchasan\Model;
-    $query = $model->db()->createQuery()->select()->from('language');
+    $query = $model->db()->createQuery()->select()->from('language')->order('key');
     // เตรียมข้อมูล
     $datas = array();
     foreach ($query->toArray()->execute() as $item) {
@@ -90,7 +95,7 @@ class Model extends \Kotchasan\Orm\Field
     // บันทึกไฟล์ภาษา
     $error = '';
     foreach ($datas as $type => $items) {
-      $error .= \Kotchasan\Language::save($items, $type);
+      $error .= Language::save($items, $type);
     }
     return $error;
   }
@@ -106,6 +111,7 @@ class Model extends \Kotchasan\Orm\Field
       $model = new \Kotchasan\Model;
       // ตาราง language
       $language_table = $model->getTableName('language');
+      // โหลดไฟล์ภาษาที่ติดตั้งไว้
       $f = opendir($dir);
       while (false !== ($text = readdir($f))) {
         if (preg_match('/([a-z]{2,2})\.(php|js)/', $text, $match)) {
@@ -137,7 +143,7 @@ class Model extends \Kotchasan\Orm\Field
     foreach (include ($file_name) AS $key => $value) {
       if (is_array($value)) {
         $type = 'array';
-      } else if (is_int($value)) {
+      } elseif (is_int($value)) {
         $type = 'int';
       } else {
         $type = 'text';

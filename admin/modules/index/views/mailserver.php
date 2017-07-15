@@ -34,9 +34,10 @@ class View extends \Gcms\Adminview
         'id' => 'setup_frm',
         'class' => 'setup_frm',
         'autocomplete' => 'off',
-        'action' => 'index.php/index/model/mailserver/save',
+        'action' => 'index.php/index/model/mailserver/submit',
         'onsubmit' => 'doFormSubmit',
-        'ajax' => true
+        'ajax' => true,
+        'token' => true
     ));
     $fieldset = $form->add('fieldset', array(
       'title' => '{LNG_General}'
@@ -134,7 +135,7 @@ class View extends \Gcms\Adminview
     ));
     // submit
     $fieldset->add('submit', array(
-      'class' => 'button ok large',
+      'class' => 'button save large',
       'value' => '{LNG_Save}'
     ));
     $form->script('initMailserver();');
