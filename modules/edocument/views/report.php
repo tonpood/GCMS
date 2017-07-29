@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource edocument/views/report.php
+ * @filesource modules/edocument/views/report.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -46,14 +46,14 @@ class View extends \Gcms\View
         /* Model */
         'model' => 'Edocument\Admin\Report\Model',
         /* คอลัมน์ที่ไม่ต้องแสดงผล */
-        'hideColumns' => array('lname', 'email', 'id'),
+        'hideColumns' => array('lname', 'email', 'id', 'document_id'),
         /* Uri */
         'uri' => Uri::createFromUri(WEB_URL.'index.php?module=editprofile&tab='.$index->tab.'&id='.$index->id),
         /* รายการต่อหน้า */
         'perPage' => $request->cookie('edocument_perPage', 30)->toInt(),
         /* query where */
         'defaultFilters' => array(
-          array('D.document_id', $index->id)
+          array('document_id', $index->id)
         ),
         /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
         'onRow' => array($this, 'onRow'),

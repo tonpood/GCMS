@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource edocument/models/admin/setup.php
+ * @filesource modules/edocument/models/admin/setup.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -48,6 +48,7 @@ class Model extends \Kotchasan\Orm\Field
         'A.downloads',
         'A.file',
         'A.module_id',
+        'A.sender_id'
       ),
     );
   }

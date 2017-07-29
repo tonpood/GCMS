@@ -85,16 +85,15 @@ class View extends \Gcms\View
       Gcms::$view->addBreadcrumb($index->canonical, $index->topic);
     } else {
       // breadcrumb ของโมดูล
-      if (Gcms::$menu->isHome($index->index_id)) {
-        $index->canonical = WEB_URL.'index.php';
+      if (empty($index->category_id)) {
+        $index->canonical = Gcms::createUrl($index->module);
+      } elseif (is_array($index->category_id)) {
+        $index->canonical = Gcms::createUrl($index->module, '', 0, 0, 'cat='.implode(',', $index->category_id));
       } else {
-        if (empty($index->category_id)) {
-          $index->canonical = Gcms::createUrl($index->module);
-        } elseif (is_array($index->category_id)) {
-          $index->canonical = Gcms::createUrl($index->module, '', 0, 0, 'cat='.implode(',', $index->category_id));
-        } else {
-          $index->canonical = Gcms::createUrl($index->module, '', $index->category_id);
-        }
+        $index->canonical = Gcms::createUrl($index->module, '', $index->category_id);
+        $index->canonical = Gcms::createUrl($index->module, '', $index->category_id);
+      }
+      if (!Gcms::$menu->isHome($index->index_id)) {
         $menu = Gcms::$menu->findTopLevelMenu($index->index_id);
         if ($menu) {
           Gcms::$view->addBreadcrumb($index->canonical, $menu->menu_text, $menu->menu_tooltip);

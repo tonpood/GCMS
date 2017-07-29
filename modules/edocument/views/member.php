@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource edocument/views/member.php
+ * @filesource modules/edocument/views/member.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -67,7 +67,7 @@ class View extends \Gcms\View
           ),
           /* query where */
           'defaultFilters' => array(
-            array('A.sender_id', (int)$login['id'])
+            array('sender_id', (int)$login['id'])
           ),
           /* เรียงลำดับ */
           'sort' => 'A.last_update desc',

@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource edocument/models/admin/report.php
+ * @filesource modules/edocument/models/admin/report.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -27,7 +27,7 @@ class Model extends \Kotchasan\Orm\Field
   public function getConfig()
   {
     return array(
-      'select' => array('D.member_id id', 'U.fname', 'U.lname', 'U.email', 'U.status', 'D.last_update', 'D.downloads'),
+      'select' => array('D.member_id id', 'U.fname', 'U.lname', 'U.email', 'U.status', 'D.last_update', 'D.downloads', 'D.document_id'),
       'join' => array(
         array(
           'LEFT',

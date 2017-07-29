@@ -97,7 +97,7 @@ class View extends \Kotchasan\KBase
     $response = new \Kotchasan\Http\Response;
     $response->withHeaders(array(
         'Content-type' => 'application/javascript; charset=utf-8',
-        'Cache-Control' => 'public',
+        'Cache-Control' => 'private, max-age=31536000',
         // cache 1 month
         'Expires' => gmdate('D, d M Y H:i:s', strtotime('+1 month')).' GMT',
       ))

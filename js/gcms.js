@@ -29,7 +29,7 @@ function getCurrentURL() {
   var u = window.location.href;
   var us2 = u.split('#');
   u = us2.length == 2 ? us2[0] : u;
-  var us1 = u.split('?');
+  var hs, us1 = u.split('?');
   u = us1.length == 2 ? us1[0] : u;
   if (us1.length == 2) {
     forEach(us1[1].split('&'), function () {

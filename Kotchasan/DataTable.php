@@ -665,7 +665,9 @@ class DataTable extends \Kotchasan\KBase
       if (!empty($this->addNew)) {
         $prop = array();
         foreach ($this->addNew as $k => $v) {
-          $prop[$k] = $k.'="'.$v.'"';
+          if ($k != 'text') {
+            $prop[$k] = $k.'="'.$v.'"';
+          }
         }
         if (preg_match('/^((.*)\s+)?(icon-[a-z0-9\-_]+)(\s+(.*))?$/', $this->addNew['class'], $match)) {
           $prop['class'] = 'class="'.trim($match[2].' '.(isset($match[5]) ? $match[5] : '')).'"';

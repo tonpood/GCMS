@@ -83,13 +83,9 @@ function defaultSubmit(ds) {
       _url = val;
       _location = val;
     } else if (prop == 'open') {
-      var a = document.createElement('a');
-      a.href = val;
-      a.target = '_blank';
-      a.style.position = 'absolute';
-      a.style.left = -100000;
-      document.body.appendChild(a);
-      a.click();
+      window.setTimeout(function () {
+        window.open(val);
+      }, 1);
     } else if (prop == 'tab') {
       initWriteTab("accordient_menu", val);
     } else if (remove.test(prop)) {

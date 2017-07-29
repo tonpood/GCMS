@@ -1,6 +1,6 @@
 <?php
 /**
- * @filesource edocument/views/admin/setup.php
+ * @filesource modules/edocument/views/admin/setup.php
  * @link http://www.kotchasan.com/
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
@@ -51,7 +51,7 @@ class View extends \Gcms\Adminview
       /* ฟังก์ชั่นจัดรูปแบบการแสดงผลแถวของตาราง */
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('id', 'ext', 'file', 'module_id'),
+      'hideColumns' => array('id', 'ext', 'file', 'module_id', 'sender_id'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
       'action' => 'index.php/edocument/model/admin/setup/action?mid='.$index->module_id,
       'actionCallback' => 'indexActionCallback',

@@ -612,8 +612,8 @@ class Uri extends \Kotchasan\KBase implements UriInterface
   private function createBack($url, $source, $query_string)
   {
     foreach ($source as $key => $value) {
-      if (preg_match('/^_{1,}(.*)$/', $key, $match)) {
-        if (!key_exists($match[1], $query_string)) {
+      if ($value !== '' && preg_match('/^_{1,}(.*)$/', $key, $match)) {
+        if (!isset($query_string[$match[1]])) {
           $query_string[$match[1]] = $value;
         }
       }
